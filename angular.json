@@ -24,9 +24,15 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
+            "showCircularDependencies": false
           },
           "configurations": {
             "production": {
@@ -119,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Company"
+    }
+  },
+  "defaultProject": "Company",
+  "cli": {
+    "analytics": "3e9d95c5-c5a6-42d5-b264-f718fe5a83a7"
+  }
 }

@@ -1,0 +1,24 @@
+.page{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.l{
+    width: 55%;
+    height: 100%;
+    background-image: linear-gradient(to bottom right, #45a8f0, #a649e9);
+}
+.r{
+    padding: 90px 0px;
+    width: 45%;
+    height: 100%;
+    background : white
+}
+mat-form-field{
+    font-size: 20px !important;
+}
+.tagline{
+    margin: 20px 0px;
+    color: white;
+    text-align: center;
+}

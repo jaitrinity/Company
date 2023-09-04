@@ -1,0 +1,182 @@
+<fieldset class="the-fieldset">
+    <legend class="the-legend">Personalia</legend>
+    <div class="row">
+        <div class="col-md-3">
+            <label class="tr-color">
+                <input type="checkbox" [(ngModel)]="isInterviewee"> Is New Employee?
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" *ngIf="!isInterviewee">
+            <mat-form-field >
+                <mat-label class="tr-color">Name *</mat-label>
+                <input matInput [(ngModel)]="name" placeholder="name">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3" *ngIf="isInterviewee">
+            <mat-form-field>
+                <mat-label class="tr-color">Name *</mat-label>
+                <mat-select [(ngModel)]="offerId" (selectionChange)="getOfferData()">
+                    <mat-option value="">Select</mat-option>
+                    <mat-option [value]="el.id" *ngFor="let el of offerApprovedList">{{el.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">Father/Husband Name *</mat-label>
+                <input matInput [(ngModel)]="fatherHusbandName" placeholder="Father/Husband Name">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">Mobile *</mat-label>
+                <input matInput [(ngModel)]="mobile" placeholder="Mobile" OnlyNumber=true maxlength="10" [readonly]="isInterviewee">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">Email Id *</mat-label>
+                <input matInput [(ngModel)]="emailId" placeholder="Email Id" [readonly]="isInterviewee">
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">DOB *</mat-label>
+                <input matInput [(ngModel)]="dob" [matDatepicker]="dobPicker" [min]="dobMinDate" [max]="dobMaxDate" placeholder="Date of Birth" readonly>
+                <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker #dobPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">DOJ *</mat-label>
+                <!-- <input matInput [(ngModel)]="doj" [matDatepicker]="dojPicker" [min]="todayDate" placeholder="Date of Joining" readonly> -->
+                <input matInput [(ngModel)]="doj" [matDatepicker]="dojPicker" placeholder="Date of Joining" readonly>
+                <mat-datepicker-toggle matSuffix [for]="dojPicker"></mat-datepicker-toggle>
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker #dojPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field>
+                <mat-label class="tr-color">Address *</mat-label> 
+                <textarea matInput [(ngModel)]="address" placeholder="Address"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">PAN *</mat-label>
+                <input matInput [(ngModel)]="pan" placeholder="PAN" maxlength="10">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">PAN Attachment *</mat-label>
+                <input matInput [value] = "panFileName" readonly>
+                <button mat-icon-button matSuffix >
+                    <mat-icon (click)="panFile.click()">attachment</mat-icon>
+                </button>
+            </mat-form-field>
+            <input accept=".jpg,.jpeg,.png,.pdf" hidden (change)="changeListener($event,1)" #panFile type="file">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">Aadhar *</mat-label>
+                <input matInput [(ngModel)]="aadhar" placeholder="Aadhar" OnlyNumber=true maxlength="12">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">Aadhar Attachment *</mat-label>
+                <input matInput [value] = "aadharFileName" readonly>
+                <button mat-icon-button matSuffix >
+                    <mat-icon (click)="aadharFile.click()">attachment</mat-icon>
+                </button>
+            </mat-form-field>
+            <input accept=".jpg,.jpeg,.png,.pdf" hidden (change)="changeListener($event,2)" #aadharFile type="file">
+        </div>
+    </div>
+</fieldset>
+<fieldset class="the-fieldset">
+    <legend class="the-legend">Earnings</legend>
+    <div class="row">
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label class="tr-color">Basic *</mat-label>
+                <input matInput [(ngModel)]="basic" placeholder="Basic" OnlyNumber=true>
+            </mat-form-field>
+        </div>
+       
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label class="tr-color">HRA</mat-label>
+                <input matInput [(ngModel)]="hsr" placeholder="HRA" OnlyNumber=true>
+            </mat-form-field>
+        </div>
+   
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label class="tr-color">Conveyance Allowance</mat-label>
+                <input matInput [(ngModel)]="conveyanceAllowance" placeholder="Conveyance Allowance" OnlyNumber=true>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label class="tr-color">Medical Allowance</mat-label>
+                <input matInput [(ngModel)]="medicalAllowance" placeholder="Medical Allowance" OnlyNumber=true>
+            </mat-form-field>
+        </div>
+    
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label class="tr-color">Telephone Allowance</mat-label>
+                <input matInput [(ngModel)]="telephoneAllowance" placeholder="Telephone Allowance" OnlyNumber=true>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label class="tr-color">Special Allowance</mat-label>
+                <input matInput [(ngModel)]="specialAllowance" placeholder="Special Allowance" OnlyNumber=true>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label class="tr-color">Other Allowance</mat-label>
+                <input matInput [(ngModel)]="otherAllowance" placeholder="Other Allowance" OnlyNumber=true>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label class="tr-color">Retention bonus (Deduction) *</mat-label>
+                <input matInput [(ngModel)]="retentionBonus" OnlyNumber=true>
+            </mat-form-field>
+        </div>
+    </div>
+</fieldset>
+<div class="row" *ngIf="inProgress">
+    <div class="col-md-12">
+        <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+        <div class="text-center text-warning">Please Wait</div>
+    </div>
+</div>
+<div class="row" *ngIf="!inProgress">
+    <div class="col-md-6">
+        <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="submitRegData()">
+            <mat-icon>save</mat-icon> Submit
+        </button>
+    </div>
+</div>
+
+

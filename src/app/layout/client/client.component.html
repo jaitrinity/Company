@@ -1,0 +1,87 @@
+<div class="row" style="padding: 10px 0px">
+    <div class="col-md-12">
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip color="white" selected (click)="openAnyModal('clientModal')">Client <mat-icon>add_circle_outline</mat-icon></mat-chip>
+      </mat-chip-list>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+      <!-- <ng2-smart-table [settings]="tableSettings" [source]="clientNameList" (custom)="onCustomAction($event)"></ng2-smart-table> -->
+      <ng2-smart-table [settings]="tableSettings" [source]="clientNameList"></ng2-smart-table>
+    </div>
+</div>
+
+<div id="clientModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">Client</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('clientModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Corporate Name *</mat-label>
+                            <mat-select [(ngModel)]="corporateId">
+                                <mat-option value="">Select</mat-option>
+                                <mat-option [value]="cn.id" *ngFor="let cn of corporateNameList">{{cn.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Client Name *</mat-label>
+                            <input matInput [(ngModel)]="clientName" placeholder="Client Name">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Contact Person *</mat-label>
+                            <input matInput [(ngModel)]="contactPerson" placeholder="Contact Person">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Address Line 1 *</mat-label>
+                            <input matInput [(ngModel)]="addLine1" placeholder="Address Line 1">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Address Line 2 *</mat-label>
+                            <input matInput [(ngModel)]="addLine2" placeholder="Address Line 2">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">State *</mat-label>
+                            <input matInput [(ngModel)]="state" placeholder="State">
+                        </mat-form-field>
+                    </div>
+                
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">GST No *</mat-label>
+                            <input matInput [(ngModel)]="gstNo" placeholder="GST No">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="submitClientData()">
+                            <mat-icon>save</mat-icon> Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+

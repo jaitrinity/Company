@@ -1,0 +1,156 @@
+<div class="row" style="padding: 10px 0px">
+    <div class="col-md-12">
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip color="white" selected (click)="openAnyModal('invoiceModal')">Invoice <mat-icon>add_circle_outline</mat-icon></mat-chip>
+      </mat-chip-list>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+      <ng2-smart-table [settings]="tableSettings" [source]="invoiceList" (custom)="onCustomAction($event)"></ng2-smart-table>
+    </div>
+</div>
+
+<div id="invoiceModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">Invoice</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('invoiceModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">PO Number *</mat-label>
+                            <input matInput [(ngModel)]="poNumber">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Corporate Name *</mat-label>
+                            <mat-select [(ngModel)]="corporateName" (selectionChange)="getClientName()">
+                              <mat-option value="">Select</mat-option>
+                              <mat-option [value]="cn.id" *ngFor="let cn of corporateNameList">{{cn.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Client Name *</mat-label>
+                            <mat-select [(ngModel)]="clientName">
+                              <mat-option value="">Select</mat-option>
+                              <mat-option [value]="cn.id" *ngFor="let cn of clientNameList">{{cn.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Work Description *</mat-label>
+                            <input matInput [(ngModel)]="workDescription" placeholder="work description">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Quanlity *</mat-label>
+                            <input matInput [(ngModel)]="quantity" OnlyNumber=true>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Unit Price (Rs) *</mat-label>
+                            <input matInput [(ngModel)]="unitPrice" OnlyNumber=true>
+                        </mat-form-field>
+                        
+                    </div>
+                </div> -->
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Works</legend>
+                    <div class="row" *ngFor="let adm of addMoreList;let i = index">
+                        <div class="{{adm.class}}">
+                            <mat-form-field>
+                                <mat-label class="tr-color">{{adm.label}} {{i+1}}</mat-label>
+                                <input matInput id='workDesciption_{{i+1}}'>
+                            </mat-form-field>
+                        </div>
+                        <div class="{{adm.class1}}">
+                            <mat-form-field>
+                                <mat-label class="tr-color">{{adm.label1}} {{i+1}}</mat-label>
+                                <input matInput id='quantity_{{i+1}}' OnlyNumber=true>
+                            </mat-form-field>
+                        </div>
+                        <div class="{{adm.class2}}">
+                            <mat-form-field>
+                                <mat-label class="tr-color">{{adm.label2}} {{i+1}}</mat-label>
+                                <input matInput id='unitPrice_{{i+1}}' OnlyNumber=true>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-chip-list #chipList aria-label="Fruit selection">
+                                <mat-chip color="white" selected (click)="addRemoveDescription('add')"><mat-icon>add_circle_outline</mat-icon></mat-chip>
+                                <mat-chip color="white" selected (click)="addRemoveDescription('remove')" *ngIf="addMoreList.length > 1"><mat-icon>remove_circle_outline</mat-icon></mat-chip>
+                            </mat-chip-list>
+                        </div>
+                    </div>
+
+                </fieldset>
+                
+                <div class="row">
+                    <div class="col-md-6" >
+                        <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="submitInvoice()">
+                            <mat-icon>save</mat-icon> Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="viewInvoiceModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">Invoice - {{viewInvId}}</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('viewInvoiceModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="downloadInvoice()">Download Invoice</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row" *ngIf="invStatus == '0'">
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Attach Sign Invoice *</mat-label>
+                            <input matInput [value] = "invoiceFileName" readonly>
+                            <button mat-icon-button matSuffix >
+                                <mat-icon (click)="invoiceFile.click()">attachment</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <input accept=".pdf" hidden (change)="changeListener($event,1)" #invoiceFile type="file">
+                    </div>
+                </div>
+                <div class="row" *ngIf="invStatus == '0'">
+                    <div class="col-md-6">
+                        <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="submitSignInvoice()">
+                            <mat-icon>save</mat-icon> Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>

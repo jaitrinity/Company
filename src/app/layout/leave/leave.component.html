@@ -1,0 +1,156 @@
+<!-- <div class="row">
+    <div class="col-md-7">
+        <div class="row" style="padding: 10px 0px">
+            <div class="col-md-12">
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip color="white" selected (click)="changeSelected($event)">Leave Apply</mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ng2-smart-table [settings]="tableSettings" [source]="leaveList" (custom)="onCustomAction($event)"></ng2-smart-table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="row" style="padding: 10px 0px">
+            <div class="col-md-12">
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip color="white" selected (click)="changeSelected($event)">Holidays</mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ng2-smart-table [settings]="tableSettings" [source]="leaveList" (custom)="onCustomAction($event)"></ng2-smart-table>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="row" style="padding: 10px 0px">
+    <div class="col-md-12">
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip color="white" selected (click)="changeSelected($event)">Leave Apply</mat-chip>
+      </mat-chip-list>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+      <ng2-smart-table [settings]="tableSettings" [source]="leaveList" (custom)="onCustomAction($event)"></ng2-smart-table>
+    </div>
+</div>
+
+<div id="viewLeaveModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">{{viewLeaveId}}</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('viewLeaveModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Reason *</mat-label>
+                            <textarea matInput [(ngModel)]="viewReason" placeholder="Reason" rows="5" readonly></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row" *ngIf="inProgress">
+                    <div class="col-md-12">
+                        <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+                        <div class="text-center text-warning">Please Wait</div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isAdmin && !inProgress">
+                    <div class="col-md-12" *ngIf="viewLeaveStatus == '0'">
+                        <button (click)="changeLeaveStatus(1)" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
+                            Approve
+                        </button> &nbsp;
+                        <button (click)="changeLeaveStatus(2)" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
+                            Reject
+                        </button>
+                    </div>
+                    <div class="col-md-12" *ngIf="viewLeaveStatus == '1'">
+                        <button (click)="changeLeaveStatus(2)" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
+                            Reject
+                        </button>
+                    </div>
+                    <div class="col-md-12" *ngIf="viewLeaveStatus == '2'">
+                        <button (click)="changeLeaveStatus(1)" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
+                            Approve
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div id="leaveApplyModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">Leave Apply</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('leaveApplyModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4" *ngIf="isAdmin">
+                        <mat-form-field>
+                          <mat-label class="tr-color">Emmployee *</mat-label>
+                          <mat-select [(ngModel)]="empId">
+                            <mat-option value="">Select</mat-option>
+                            <mat-option [value]="el.empId" *ngFor="let el of empList">{{el.name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label class="tr-color">From Date *</mat-label>
+                            <!-- <input matInput [(ngModel)]="fromDate" [matDatepickerFilter]="myFilter" [matDatepicker]="fromDatePicker" [min]="todayDate" placeholder="From Date" readonly> -->
+                            <input matInput [(ngModel)]="fromDate" [matDatepickerFilter]="myFilter" [matDatepicker]="fromDatePicker" placeholder="From Date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #fromDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+               
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label class="tr-color">To Date *</mat-label>
+                            <input matInput [(ngModel)]="toDate" [matDatepickerFilter]="myFilter" [matDatepicker]="toDatePicker" [min]="fromDate" placeholder="To Date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #toDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Reason *</mat-label>
+                            <textarea matInput [(ngModel)]="reason" placeholder="Reason" rows="5"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row" *ngIf="inProgress">
+                    <div class="col-md-12">
+                        <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+                        <div class="text-center text-warning">Please Wait</div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="!inProgress">
+                    <div class="col-md-6">
+                        <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="submitLeave()">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

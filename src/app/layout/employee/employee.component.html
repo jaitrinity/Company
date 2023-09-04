@@ -1,0 +1,468 @@
+<div class="row" style="padding: 10px 0px">
+  <div class="col-md-12">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip color="white" selected (click)="changeSelected($event)">Import Deduction<mat-icon>add_circle_outline</mat-icon></mat-chip>
+    </mat-chip-list>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <ng2-smart-table [settings]="employeeTableSettings" [source]="employeeList" (custom)="onCustomAction($event)"></ng2-smart-table>
+  </div>
+</div>
+
+<div id="editEmployeeModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <div class="modal-header" style="padding: 10px !important;">
+            <h4 class="modal-title tr-color">Edit - {{viewEmpId}}</h4>
+            <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('editEmployeeModal')">Close</button>
+        </div>
+        <div class="modal-body det-modal-body">
+          <fieldset class="the-fieldset">
+            <legend class="the-legend">Personalia</legend>
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label class="tr-color">Name *</mat-label>
+                  <input matInput [(ngModel)]="name">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label class="tr-color">Father/Husband Name *</mat-label>
+                  <input matInput [(ngModel)]="fatherHusbandName">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label class="tr-color">Mobile *</mat-label>
+                  <input matInput [(ngModel)]="mobile">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label class="tr-color">Email Id *</mat-label>
+                  <input matInput [(ngModel)]="emailId">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label class="tr-color">DOB *</mat-label>
+                  <input matInput [(ngModel)]="dob">
+                  <mat-hint>YYYY-MM-DD</mat-hint>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <mat-label class="tr-color">DOJ *</mat-label>
+                  <input matInput [(ngModel)]="doj">
+                  <mat-hint>YYYY-MM-DD</mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+            
+          </fieldset>
+            
+          <fieldset class="the-fieldset">
+            <legend class="the-legend">Earnings</legend>
+            <div class="row">
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Basic *</mat-label>
+                        <input matInput [(ngModel)]="basic" OnlyNumber=true>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">HRA *</mat-label>
+                        <input matInput [(ngModel)]="hra" OnlyNumber=true>
+                    </mat-form-field>
+                </div>
+           
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Conveyance Allowance *</mat-label>
+                        <input matInput [(ngModel)]="conveyanceAllowance" OnlyNumber=true>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Medical Allowance *</mat-label>
+                        <input matInput [(ngModel)]="medicalAllowance" OnlyNumber=true>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Telephone Allowance *</mat-label>
+                        <input matInput [(ngModel)]="telephoneAllowance" OnlyNumber=true>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Special Allowance *</mat-label>
+                        <input matInput [(ngModel)]="specialAllowance" OnlyNumber=true>
+                    </mat-form-field>
+                </div>
+           
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Other Allowance *</mat-label>
+                        <input matInput [(ngModel)]="otherAllowance" OnlyNumber=true>
+                    </mat-form-field>
+                </div>
+            </div>
+          </fieldset>
+
+          <div class="row">
+            <div class="col-md-6">
+              <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="saveRegData()">
+                  <mat-icon>save</mat-icon> Save
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            
+        </div>
+    </div>
+  </div>
+</div>
+
+<div id="viewEmployeeModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header" style="padding: 10px !important;">
+            <h4 class="modal-title tr-color">View : {{employeeObj.id}}</h4>
+            <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('viewEmployeeModal')">Close</button>
+          </div>
+          <!-- det-modal-body -->
+          <div class="modal-body">
+            <!-- <div class="row">
+              <div class="col-md-6">
+                <div class="thumbnail">
+                  <a [href] = "employeeObj.panAttachment" target="blank">
+                    <img [src] = "employeeObj.panAttachment" width="100%" height="50%"/>
+                    <div class="caption">
+                      <p>PAN - {{employeeObj.pan}}</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="thumbnail">
+                  <a [href] = "employeeObj.aadharAttachment" target="blank">
+                    <img [src] = "employeeObj.aadharAttachment" width="100%" height="50%"/>
+                    <div class="caption">
+                      <p>Aadhar - {{employeeObj.aadharNumber}}</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="row">
+              <div class="col-md-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <td>Basic</td> <td>HRA</td> <td>Conveyance Allowance</td>
+                      <td>Medical Allowance</td> <td>Telephone Allowance</td>
+                      <td>Special Allowance</td> <td>Other Allowance</td>
+                      <td>Gross Salary</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{employeeObj.basic}}</td> <td>{{employeeObj.hra}}</td> <td>{{employeeObj.conveyanceAllowance}}</td>
+                      <td>{{employeeObj.medicalAllowance}}</td> <td>{{employeeObj.telephoneAllowance}}</td>
+                      <td>{{employeeObj.specialAllowance}}</td> <td>{{employeeObj.otherAllowance}}</td>
+                      <td>{{employeeObj.grossSalary}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div> -->
+            <fieldset class="the-fieldset">
+              <legend class="the-legend">Earnings</legend>
+              <div class="row">
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Basic *</mat-label>
+                          <input matInput [value]="employeeObj.basic" readonly>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">HRA *</mat-label>
+                          <input matInput [value] ="employeeObj.hra" readonly>
+                      </mat-form-field>
+                  </div>
+             
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Conveyance Allowance *</mat-label>
+                          <input matInput [value]="employeeObj.conveyanceAllowance" readonly>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Medical Allowance *</mat-label>
+                          <input matInput [value]="employeeObj.medicalAllowance" readonly>
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Telephone Allowance *</mat-label>
+                          <input matInput [value]="employeeObj.telephoneAllowance" readonly>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Special Allowance *</mat-label>
+                          <input matInput [value]="employeeObj.specialAllowance" readonly>
+                      </mat-form-field>
+                  </div>
+             
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Other Allowance *</mat-label>
+                          <input matInput [value]="employeeObj.otherAllowance" readonly>
+                      </mat-form-field>
+                  </div>
+              </div>
+            </fieldset>
+            <fieldset class="the-fieldset">
+              <legend class="the-legend">Deductions</legend>
+              <div class="row">
+                  <div class="col-md-3">
+                    <mat-form-field>
+                      <mat-label class="tr-color">Month *</mat-label>
+                      <mat-select [(ngModel)]="month" (selectionChange)="getDeduction()">
+                        <mat-option value="">Select</mat-option>
+                        <mat-option [value]="ml" *ngFor="let ml of monthList">{{ml}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Paid Days *</mat-label>
+                        <input matInput [(ngModel)]="paidDays" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Retention bonus *</mat-label>
+                          <input matInput [(ngModel)]="retentionBonus" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                          <input matInput [value]="deductionObj.retentionBonus" *ngIf="(deductionObj | json) != '{}'" readonly>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Profession Tax *</mat-label>
+                          <input matInput [(ngModel)]="professionTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
+                          <input matInput [value]="deductionObj.professionTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                      </mat-form-field>
+                  </div>
+             
+                  <!-- <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Loss of Pay(Leave) *</mat-label>
+                          <input matInput [(ngModel)]="lossOfPay" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                          <input matInput [value]="deductionObj.lossOfPay" *ngIf="(deductionObj | json) != '{}'" readonly>
+                      </mat-form-field>
+                  </div> -->
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Other Deductions *</mat-label>
+                          <input matInput [(ngModel)]="otherDeductions" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                          <input matInput [value]="deductionObj.otherDeductions" *ngIf="(deductionObj | json) != '{}'" readonly>
+                      </mat-form-field>
+                  </div>
+              
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Income Tax *</mat-label>
+                          <input matInput [(ngModel)]="incomeTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
+                          <input matInput [value]="deductionObj.incomeTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                      <mat-form-field>
+                          <mat-label class="tr-color">Other Tax *</mat-label>
+                          <input matInput [(ngModel)]="otherTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
+                          <input matInput [value]="deductionObj.otherTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                      </mat-form-field>
+                  </div>
+              </div>
+            </fieldset>
+
+            <div class="row">
+              <div class="col-md-6" *ngIf="(deductionObj | json) == '{}' ; else elseBlock">
+                  <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="submitDeductionData()">
+                      <mat-icon>save</mat-icon> Submit
+                  </button>
+              </div>
+              <ng-template #elseBlock>
+                <div class="col-md-6">
+                  <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="downloadSalarySlip()">
+                    <mat-icon>download</mat-icon> PDF
+                </button>
+                </div>
+              </ng-template>
+
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-12">
+                <table border="1" class="table">
+                  <tr>
+                    <th rowspan="4">
+                      <img src = "assets/img/logo.jpg" width="100%"/>
+                    </th>
+                    <th colspan="3">
+                      TRINITY MOBILE APP LAB PVT. LTD.
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colspan="3">
+                      Office No: C-313, Noida One, B-8,
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colspan="3">
+                      Sector-62, Noida (UP) - 201309.
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colspan="5">
+                      Pay Slip for the Month of  Jun-2019
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Employee Name</th> <td>{{employeeObj.empName}}</td>
+                    <th>Paid days</th> <td>21</td>
+                  </tr>
+                  <tr>
+                    <th>Father/Husband Name</th> <td>{{employeeObj.fatherHusbandName}}</td>
+                    <th>DOJ</th> <td>{{employeeObj.doj}}</td>
+                  </tr>
+                  <tr>
+                    <th>DOB</th> <td>{{employeeObj.dob}}</td>
+                    <th>PAN No</th> <td>{{employeeObj.pan}}</td>
+                  </tr>
+                  <tr>
+                    <th>Earnings</th> <th>Amount</th> <th>Deductions</th> <th>Amount</th>
+                  </tr>
+                  <tr>
+                    <th>Basic</th> <td>{{employeeObj.basic}}</td> <th>Retention bonus</th> <th></th>
+                  </tr>
+                  <tr>
+                    <th>HRA</th> <td>{{employeeObj.hra}}</td> <th>Profession Tax</th> <th></th>
+                  </tr>
+                  <tr>
+                    <th>Conveyance Allowance</th> <td>{{employeeObj.conveyanceAllowance}}</td> <th>Loss of Pay(Leave)</th> <th></th>
+                  </tr>
+                  <tr>
+                    <th>Medical Allowance</th> <td>{{employeeObj.medicalAllowance}}</td> <th>Other Deductions</th> <th></th>
+                  </tr>
+                  <tr>
+                    <th>Telephone Allowance</th> <td>{{employeeObj.telephoneAllowance}}</td> <th>Income Tax</th> <th></th>
+                  </tr>
+                  <tr>
+                    <th>Special Allowance</th> <td>{{employeeObj.specialAllowance}}</td> <th></th> <th></th>
+                  </tr>
+                  <tr>
+                    <th>Other Allowance</th> <td>{{employeeObj.otherAllowance}}</td> <th>Total Deductions</th> <th></th>
+                  </tr>
+                  <tr>
+                    <th>Gross Salary</th> <th></th> <th>Net Salary</th> <th></th>
+                  </tr>
+                </table>
+              </div> -->
+            </div> 
+          <div class="modal-footer">
+          </div>
+      </div>
+  </div>
+</div>
+<div id="deductionModal" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header" style="padding: 10px !important;">
+				<h4 class="modal-title tr-color">Deduction</h4>
+				<button type="button" class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('deductionModal')">Close</button>
+			</div>
+      <!-- det-modal-body -->
+			<div class="modal-body">
+        
+        <div class="row">
+          <div class="col-md-3">
+            <button type="button" class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="downloadReport(1)">Download Employee</button>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label class="tr-color">Month *</mat-label>
+              <mat-select [(ngModel)]="dedMonth" (selectionChange)="getPaidDays()">
+                <mat-option value="">Select</mat-option>
+                <mat-option [value]="ml" *ngFor="let ml of monthList">{{ml}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field>
+              <mat-label class="tr-color">Select excel file *</mat-label>
+              <input matInput [value] = "uploadFileName" readonly>
+              <button mat-icon-button matSuffix >
+                <mat-icon (click)="uploadFile.click()">attachment</mat-icon>
+              </button>
+            </mat-form-field>
+            <input type="file" (change)="addfile($event)" hidden #uploadFile
+             accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="uploadDeduction()">Upload</button>
+          </div>
+        
+          
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="tr-color"><span>Preview Data</span></h2>
+          </div>
+          <div class="col-md-12">
+            <table class="table table-bordered table-striped myTable">
+              <thead>
+                <tr>
+                  <th>EmpId</th> <th>Name</th> <th>Month</th> <th>Paid Days</th> <th>Retention Bonus</th> 
+                  <th>Profession Tax</th> 
+                  <!-- <th>Loss Of Pay(Leave)</th>  -->
+                  <th>Other Deductions</th> <th>Income Tax</th> <th>Other Tax</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pdl of previewDedunctionList">
+                  <td>{{pdl.empId}}</td> <td>{{pdl.name}}</td> <td>{{pdl.month}}</td> <td>{{pdl.paidDays}}</td> <td>{{pdl.retentionBonus}}</td> 
+                  <td>{{pdl.professionTax}}</td> 
+                  <!-- <td>{{pdl.lossOfPay}}</td>  -->
+                  <td>{{pdl.otherDeductions}}</td> <td>{{pdl.incomeTax}}</td> <td>{{pdl.otherTax}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+			
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>

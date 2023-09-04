@@ -1,1 +1,171 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-image: linear-gradient(to bottom right, #45a8f0, #a649e9);
+}
+.row{
+    margin: 0px;
+}
+mat-form-field {
+    width: 100%;
+}
+.the-fieldset {
+    background: white;
+    margin: 15px 0px;
+    border: 1px solid #e0e0e0;
+    padding: 5px 25px;
+    border-radius: 5px;
+}
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    margin-bottom: 0;
+    width: auto;
+    color: #45a8f0;
+    border-bottom: 2px solid #45a8f0;
+}
+ng2-smart-table .ng2-smart-action-delete-delete,
+ng2-smart-table .ng2-smart-action-edit-edit,
+ng2-smart-table .ng2-smart-action-custom-custom {
+    padding:3px;
+    color: #45a8f0 !important;
+    font-weight: 500;
+    border: 1px solid #a649e9;
+    border-radius: 3px;
+    font-size:12px;
+    margin-right: 5px
+}
+ng2-smart-table .ng2-smart-action-delete-delete:hover,
+ng2-smart-table .ng2-smart-action-edit-edit:hover,
+ng2-smart-table .ng2-smart-action-custom-custom:hover{
+    text-decoration: none !important;
+    background: #a649e9;
+    color:white !important;
+}
+ng2-smart-table .ng2-smart-pagination-nav > ul > li > a,.mat-expansion-panel-header-title {
+    color:#28c1f4 !important;
+}
+ng2-smart-table .page-item.active .page-link {
+    color: #fff !important;
+    background-color: #45a8f0 !important;
+    border-color: #a649e9 !important;
+}
+.ng-dirty{
+    color: black !important;
+}
+img.icon{
+    width: 50px;
+    height: 50px
+}
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+    z-index: 99999 !important;
+ }
+ mat-chip{
+    background: #fff !important;
+    border : 1px solid #a649e9 !important;
+    color: #a649e9 !important;
+}
+.tr-color{
+    color: #a649e9;
+}
+h1 span,h2 span,h3,h4,h5,h6{
+    border-bottom: 1.5px solid #a649e9;
+}
+/* Smart table style - start */
+ng2-smart-table table{
+    /* width: 1500px; */
+    width: 1317px;
+}
+
+/* ng2-smart-table th.ng2-smart-actions{
+    width : 195px;
+} */
+
+ng2-smart-table thead > tr > th
+{
+    background-image: linear-gradient(to bottom right, #45a8f0, #a649e9);
+    color:white;
+}
+
+ng2-smart-table tbody > tr > td:first-child {
+    color: #61727f;
+}
+ng2-smart-table table{
+    font-size:12px;
+    background-color:white;
+    border: 1px solid #dbdbdb;
+}
+ng2-smart-table tbody > tr:nth-of-type(odd) {
+    background-color: #c2dceb;
+}
+ng2-smart-table tbody > tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+ng2-smart-table ng2-smart-table-pager{
+    float:right;
+}
+ng2-smart-table ng2-smart-table-pager .ng2-smart-pagination, .ng2-smart-page-item{
+    font-size:17px;
+}
+ng2-smart-table ng2-smart-table-pager .ng2-smart-page-link span{
+    font-size:17px;    
+}
+    
+ng2-smart-table table input{
+    height:25px;
+}
+ng2-smart-table tbody > tr > td > a {
+    color: #61727f;
+}
+ng2-smart-table tbody > tr  {
+    border-bottom: 1px solid #dbdbdb;
+}
+ng2-smart-table tbody > tr > td {
+    border-right: 1px solid #dbdbdb;
+}
+ng2-smart-table thead > tr  {
+    border-bottom: 1px solid #dbdbdb;
+}
+ng2-smart-table thead > tr > th  {
+    border-right: 1px solid #dbdbdb;
+}
+  
+ng2-smart-table tbody > tr > th > a {
+    color: #61727f;
+}
+ 
+a { color: #61727f; }
+a:link { color: #61727f; }
+a:hover { color: #61727f; }
+a:focus { color: #61727f; }
+  
+/* ng2-smart-table a { color: #61727f; }
+ng2-smart-table a:link { color: #61727f; }
+ng2-smart-table a:hover { color: #61727f; }
+ng2-smart-table a:focus { color: #61727f; } */
+ng2-smart-table a { color: white; }
+ng2-smart-table a:link { color: white; }
+ng2-smart-table a:hover { color: white; }
+ng2-smart-table a:focus { color: white; }
+
+tr.ng2-smart-row a { color: #61727f; }
+tr.ng2-smart-row a:link { color: #61727f; }
+tr.ng2-smart-row a:hover { color: #61727f; }
+tr.ng2-smart-row a:focus { color: #61727f; }
+ng2-smart-table .ng2-smart-title{
+    font-weight: 500 !important;
+}
+/* Smart table style - end */
+.det-modal-body{
+    height: 505px !important;
+    overflow: auto;
+}
+.mat-simple-snackbar-action {
+    color: white !important;
+}
+
+
+

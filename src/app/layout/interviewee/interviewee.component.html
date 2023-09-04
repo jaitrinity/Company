@@ -1,0 +1,159 @@
+<div class="row" style="padding: 10px 0px">
+    <div class="col-md-12">
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip color="white" selected (click)="changeSelected($event)">Interviewee</mat-chip>
+      </mat-chip-list>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+      <ng2-smart-table [settings]="tableSettings" [source]="intevieweeList" (custom)="onCustomAction($event)"></ng2-smart-table>
+    </div>
+</div>
+
+<div id="intervieweeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">Interviewee</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('intervieweeModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Personalia</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Name *</mat-label>
+                                <input matInput [(ngModel)]="name" placeholder="Name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Mobile *</mat-label>
+                                <input matInput [(ngModel)]="mobile" placeholder="Mobile" maxlength="10" OnlyNumber=true>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">EmailId *</mat-label>
+                                <input matInput [(ngModel)]="emailId" placeholder="EmailId">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Employement</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Company Name *</mat-label>
+                                <input matInput [(ngModel)]="companyName" placeholder="Company Name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">CTC *</mat-label>
+                                <input matInput [(ngModel)]="ctc" placeholder="CTC" OnlyNumber=true>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Notice Period(In Days) *</mat-label>
+                                <input matInput [(ngModel)]="noticePeriod" placeholder="Notice Period(In Days)" OnlyNumber=true>
+                            </mat-form-field>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <mat-label class="tr-color">CV Attachment *</mat-label>
+                                <input matInput [value] = "cvFileName" readonly>
+                                <button mat-icon-button matSuffix >
+                                    <mat-icon (click)="cvFile.click()">attachment</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <input accept=".doc,
+                            .docx,
+                            application/msword,
+                            application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                            .pdf" hidden (change)="changeListener($event,1)" #cvFile type="file">
+                        </div> 
+                    </div>
+                </fieldset>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="submitInteviewee()">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="viewIntervieweeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">Interviewee - {{viewId}}</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('viewIntervieweeModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Employement</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Company Name *</mat-label>
+                                <input matInput [(ngModel)]="companyName" placeholder="Company Name" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">CTC *</mat-label>
+                                <input matInput [(ngModel)]="ctc" placeholder="CTC" OnlyNumber=true readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Notice Period(In Days) *</mat-label>
+                                <input matInput [(ngModel)]="noticePeriod" placeholder="Notice Period(In Days)" OnlyNumber=true readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div *ngIf="viewStatus == '0'">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Remark *</mat-label> 
+                                <textarea matInput [(ngModel)]="remark" placeholder="Enter remark in case of Selected or Rejected" rows="5"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="changeIntervieweeStatus(1)">
+                                Selected
+                            </button> &nbsp;
+                            <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="changeIntervieweeStatus(2)">
+                                Rejected
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>

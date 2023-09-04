@@ -1,0 +1,32 @@
+.header{
+    height: 8%;
+}
+.header img{
+    height: 3pc;
+    width: 6pc
+}
+.content{
+    height: 88%;
+    background : white;
+    overflow: auto;
+}
+.footer{
+    height: 4%;
+    text-align: center;
+    color: white;
+}
+.ActiveRoute {
+    border-bottom: 2px solid white;
+}
+ul{
+    margin: 8px 0px;
+    list-style-type: none;
+}
+ul li{
+    float: left;
+    margin-right: 10px;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+}

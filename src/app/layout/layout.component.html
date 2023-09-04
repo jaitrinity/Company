@@ -1,0 +1,33 @@
+<div class="row header">
+    <div class="col-md-2">
+        <img src="assets/img/logo1.png"  />
+    </div>
+    <div class="col-md-8">
+        <ul>
+            <li routerLink="registration" [routerLinkActive] = '["ActiveRoute"]' *ngIf="isAdmin">Registration</li>
+            <li routerLink="employee" [routerLinkActive] = '["ActiveRoute"]' *ngIf="isAdmin">Employee</li>
+            <li routerLink="offer-letter" [routerLinkActive] = '["ActiveRoute"]' *ngIf="isAdmin">Offer Letter</li>
+            <li routerLink="leave" [routerLinkActive] = '["ActiveRoute"]' *ngIf="isAdmin || isEmployee">Leave</li>
+            <li routerLink="interviewee" [routerLinkActive] = '["ActiveRoute"]' *ngIf="isAdmin">Interviewee</li>
+            <li routerLink="invoice" [routerLinkActive] = '["ActiveRoute"]' *ngIf="isAdmin || isFinance">Invoice</li>
+            <li routerLink="client" [routerLinkActive] = '["ActiveRoute"]' *ngIf="isAdmin || isFinance">Client</li>
+            <li routerLink="po" [routerLinkActive] = '["ActiveRoute"]' *ngIf="isAdmin || isFinance">PO</li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+        <button mat-button (click)='logout()' style="color: white; float: right;margin: 8px 0px;">
+            {{loginEmpName}} - Logout <mat-icon>exit_to_app</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="row content">
+    <div class="col-md-12">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<div class="row footer">
+    <div class="col-md-12">
+        Trinity Mobile App Lab Pvt Ltd.
+    </div>
+</div>
+
