@@ -31,6 +31,13 @@ import { InvoiceComponent } from './layout/invoice/invoice.component';
 import { ClientComponent } from './layout/client/client.component';
 import { PoComponent } from './layout/po/po.component';
 import { ActiveComponent } from './layout/employee/active.component';
+import { MapViewComponent } from './layout/map-view/map-view.component';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+import { WorkInProgressComponent } from './work-in-progress/work-in-progress.component';
+import { AttendanceComponent } from './layout/attendance/attendance.component';
+import { ReportComponent } from './layout/report/report.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -46,7 +53,11 @@ import { ActiveComponent } from './layout/employee/active.component';
     InvoiceComponent,
     ClientComponent,
     PoComponent,
-    ActiveComponent
+    ActiveComponent,
+    MapViewComponent,
+    WorkInProgressComponent,
+    AttendanceComponent,
+    ReportComponent
   ],
   entryComponents: [ActiveComponent],
   imports: [
@@ -65,7 +76,12 @@ import { ActiveComponent } from './layout/employee/active.component';
     Ng2SmartTableModule,
     MatSelectModule,
     MatChipsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatExpansionModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCBRHoDj-z_mh59rKgkXo6_P9eU2KOGoeM' 
+    }),
+    AgmDirectionModule
   ],
   providers: [AuthGuard,MatDatepickerModule, DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }

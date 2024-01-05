@@ -20,6 +20,7 @@ export class EmployeeComponent implements OnInit {
   emailId = "";
   dob = "";
   doj = "";
+  leaveBalance = "";
   basic = "";
   hra = "";
   conveyanceAllowance = "";
@@ -40,10 +41,12 @@ export class EmployeeComponent implements OnInit {
   incomeTax = "";
   otherTax = "";
   loginEmpId = "";
+  loginEmpRoleId = "";
   button = "";
   constructor(private sharedService : SharedService, private layoutComponent : LayoutComponent,
     private datePipe : DatePipe) { 
     this.loginEmpId = localStorage.getItem("loginEmpId")
+    this.loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
     this.button = localStorage.getItem("button")
     this.layoutComponent.setTitle("Employee");
   }
@@ -117,7 +120,8 @@ export class EmployeeComponent implements OnInit {
 
   getEmployeeList(){
     let jsonData = {
-      loginEmpId : this.loginEmpId
+      loginEmpId : this.loginEmpId,
+      loginEmpRoleId : this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"employee")
     .subscribe(
@@ -157,6 +161,7 @@ export class EmployeeComponent implements OnInit {
     this.emailId = editEmpObj.emailId;
     this.dob = editEmpObj.dob;
     this.doj = editEmpObj.doj;
+    this.leaveBalance = editEmpObj.leaveBalance;
     this.basic = editEmpObj.basic;
     this.hra = editEmpObj.hra;
     this.conveyanceAllowance = editEmpObj.conveyanceAllowance;
@@ -183,6 +188,7 @@ export class EmployeeComponent implements OnInit {
       emailId : this.emailId,
       dob : this.dob,
       doj : this.doj,
+      leaveBalance : this.leaveBalance,
       basic : this.basic,
       hra : this.hra,
       conveyanceAllowance : this.conveyanceAllowance,
@@ -368,6 +374,7 @@ export class EmployeeComponent implements OnInit {
 
     let jsonData = {
       loginEmpId : this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId,
       empId : this.viewEmpId,
       month : this.month
     }

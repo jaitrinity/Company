@@ -11,8 +11,8 @@ export class EmployeeTableSetting{
           edit : false,
           delete : false,
           custom: [
-            { name: 'editRecord', title: 'Edit' },
-            { name: 'viewRecord', title: 'View'},
+            { name: 'editRecord', title: '<i class="fas fa-pencil" title="Edit"></i>' },
+            { name: 'viewRecord', title: '<i class="fas fa-eye" title="View"></i>'},
             // { name: 'activerecord', title: 'Activate' },
             // { name: 'deactiverecord', title: 'Deactivate' },
           ],
@@ -28,19 +28,22 @@ export class EmployeeTableSetting{
           //   title : "Role"
           // },
           mobile: {
-            title: 'Mobile'
+            title: 'Mobile',
+            width:'100px'
           },
           emailId: {
             title: 'Email Id'
           },
           dob: {
             title: 'DOB',
+            width:'100px',
             valuePrepareFunction : (value)=>{
               return new DatePipe('en-EN').transform(value, 'dd-MM-yyyy');
             }
           },
           doj: {
             title: 'DOJ',
+            width:'100px',
             valuePrepareFunction : (value)=>{
               return new DatePipe('en-EN').transform(value, 'dd-MM-yyyy');
             }
@@ -48,6 +51,7 @@ export class EmployeeTableSetting{
           aadharNumber : {
             title: 'Aadhar Number',
             type: 'html',
+            width:'120px',
             valuePrepareFunction: (cell, row) =>{
               return "<a href='"+row.aadharAttachment+"' target='_blank'>"+row.aadharNumber+"</a>";
             }
@@ -56,9 +60,14 @@ export class EmployeeTableSetting{
           pan: {
             title: 'PAN',
             type: 'html',
+            width:'120px',
             valuePrepareFunction: (cell, row) =>{
               return "<a href='"+row.panAttachment+"' target='_blank'>"+row.pan+"</a>";
             }
+          },
+          leaveBalance:{
+            title: 'LB',
+            width:'50px',
           },
           
           // basic : {
@@ -82,11 +91,12 @@ export class EmployeeTableSetting{
           // otherAllowance : {
           //   title : "Other Allowance"
           // }
-          salaryStatus:{
-            title : "Salary Status"
-          },
+          // salaryStatus:{
+          //   title : "Salary Status"
+          // },
           activeStatus:{
-            title : "Active Status"
+            title : "Active Status",
+            width:'100px'
           },
           isActive:{
             title: 'Status',

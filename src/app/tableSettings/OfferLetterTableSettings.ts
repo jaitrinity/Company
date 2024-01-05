@@ -10,8 +10,8 @@ export class OfferLetterTableSettings{
           edit : false,
           delete : false,
           custom: [
-            { name: 'viewOffer', title: 'View Offer'},
-            { name: 'resendOffer', title: 'Re-send Offer'}
+            { name: 'viewOffer', title: '<i class="fas fa-eye" title="View offer"> </i> '},
+            { name: 'resendOffer', title: '<i class="fas fa-repeat" title="Re-send offer"> </i>'}
           ],
         },
         pager :{

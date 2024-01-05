@@ -37,7 +37,7 @@
               <div class="col-md-3">
                 <mat-form-field>
                   <mat-label class="tr-color">Mobile *</mat-label>
-                  <input matInput [(ngModel)]="mobile">
+                  <input matInput [(ngModel)]="mobile" OnlyNumber=true>
                 </mat-form-field>
               </div>
               <div class="col-md-3">
@@ -62,6 +62,10 @@
                   <mat-hint>YYYY-MM-DD</mat-hint>
                 </mat-form-field>
               </div>
+              <mat-form-field class="col-md-3">
+                <mat-label class="tr-color">Leave Balance *</mat-label>
+                <input matInput [(ngModel)]="leaveBalance" OnlyNumber=true>
+              </mat-form-field>
             </div>
             
           </fieldset>

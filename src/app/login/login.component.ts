@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
   hide : boolean = true;
   showPassword : boolean = true;
   public loginModel : AuthenticateModel;
+  loginEmpId = "";
+  loginEmpRoleId = "";
   button = "#a649e9";
   constructor(private titleService : Title, private sharedService : SharedService,
     private router:Router, private _snackBar: MatSnackBar) { 
@@ -60,6 +62,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("loginEmpRole",wrappedObj.empRole);
           localStorage.setItem(btoa("isValidToken"),btoa(Constant.TRINITY_PRIVATE_KEY));
           localStorage.setItem("button",this.button);
+          this.loginEmpId = wrappedObj.empId;
+          this.loginEmpRoleId = wrappedObj.empRoleId;
           this.router.navigate(['/layout']);
         }
         else if(result.responseCode === Constant.NO_RECORDS_FOUND_CODE){
@@ -81,7 +85,8 @@ export class LoginComponent implements OnInit {
       return;
     }
     let jsonData = {
-      loginEmpId : "",
+      loginEmpId : this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId,
       mobile : this.loginModel.mobile
     }
     this.sharedService.getAllListBySelectType(jsonData,"validateMobile")

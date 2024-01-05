@@ -22,9 +22,13 @@ export class ClientComponent implements OnInit {
   gstNo = "";
   tableSettings = ClientTableSettings.settings;
   clientNameList = []
+  loginEmpId = "";
+  loginEmpRoleId = "";
   button = "";
   constructor(private sharedService : SharedService, private layoutComponent : LayoutComponent) { 
     this.layoutComponent.setTitle("Client");
+    this.loginEmpId = localStorage.getItem("loginEmpId")
+    this.loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
     this.button = localStorage.getItem("button")
   }
 
@@ -35,7 +39,8 @@ export class ClientComponent implements OnInit {
 
   allClient(){
     let jsonData = {
-
+      loginEmpId: this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData, "client")
     .subscribe(
@@ -50,7 +55,8 @@ export class ClientComponent implements OnInit {
 
   getCorporateAndClientList(){
     let jsonData = {
-
+      loginEmpId: this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"corporateAndClient")
     .subscribe(

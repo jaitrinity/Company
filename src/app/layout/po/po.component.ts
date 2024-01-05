@@ -17,9 +17,13 @@ export class PoComponent implements OnInit {
   clientNameList = [];
   tableSettings = PoTableSettings.settings;
   poList = [];
+  loginEmpId = "";
+  loginEmpRoleId = "";
   button = "";
   constructor(private sharedService : SharedService, private layoutComponent : LayoutComponent) { 
     this.layoutComponent.setTitle("PO");
+    this.loginEmpId = localStorage.getItem("loginEmpId")
+    this.loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
     this.button = localStorage.getItem("button")
   }
 
@@ -30,7 +34,8 @@ export class PoComponent implements OnInit {
 
   getAllPo(){
     let jsonData = {
-
+      loginEmpId : this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"POData")
     .subscribe(
@@ -45,7 +50,8 @@ export class PoComponent implements OnInit {
 
   getCorporateAndClientList(){
     let jsonData = {
-
+      loginEmpId : this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"corporateAndClient")
     .subscribe(

@@ -30,10 +30,15 @@
 </div> -->
 
 <div class="row" style="padding: 10px 0px">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <mat-chip-list #chipList aria-label="Fruit selection">
         <mat-chip color="white" selected (click)="changeSelected($event)">Leave Apply</mat-chip>
       </mat-chip-list>
+    </div>
+    <div class="col-md-6" *ngIf="leaveBalance != ''">
+        <mat-chip-list #chipList aria-label="Fruit selection">
+           <mat-chip color="white" selected>Leave balance : {{leaveBalance}}</mat-chip>
+        </mat-chip-list>
     </div>
 </div>
 <div class="row">

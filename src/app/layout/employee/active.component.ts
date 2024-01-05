@@ -7,10 +7,10 @@ import { EmployeeComponent } from './employee.component';
   template: `
     <div>
       <button class='mybtn' *ngIf="rowData.isActive == 1" (click)="employeeAction()">
-        Deactive
+        <i class="fas fa-times" title="Deactive"> </i> 
       </button>
       <button class='mybtn' *ngIf="rowData.isActive == 0" (click)="employeeAction()">
-        Active
+        <i class="fas fa-check" title="Active"> </i> 
       </button>
     </div>
   `,

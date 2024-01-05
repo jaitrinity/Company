@@ -24,10 +24,13 @@ export class InvoiceComponent implements OnInit {
   unitPrice = "";
   tableSettings = InvoiceTableSettings.settings;
   invoiceList = [];
-
+  loginEmpId = "";
+  loginEmpRoleId = "";
   button = "";
   constructor(private sharedService : SharedService, private layoutComponent : LayoutComponent) { 
     this.layoutComponent.setTitle("Invoice");
+    this.loginEmpId = localStorage.getItem("loginEmpId")
+    this.loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
     this.button = localStorage.getItem("button")
   }
 
@@ -37,7 +40,8 @@ export class InvoiceComponent implements OnInit {
   }
   getAllInvoices(){
     let jsonData = {
-
+      loginEmpId: this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"invoices")
     .subscribe(
@@ -51,7 +55,8 @@ export class InvoiceComponent implements OnInit {
   }
   getCorporateAndClientList(){
     let jsonData = {
-
+      loginEmpId: this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"corporateAndClient")
     .subscribe(

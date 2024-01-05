@@ -10,7 +10,7 @@ export class LeaveTableSettings{
           edit : false,
           delete : false,
           custom: [
-            { name: 'viewRecord', title: 'View'},
+            { name: 'viewRecord', title: '<i class="fas fa-eye" title="View"></i>'},
             // { name: 'activerecord', title: 'Activate' },
             // { name: 'deactiverecord', title: 'Deactivate' },
           ],

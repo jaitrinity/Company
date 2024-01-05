@@ -21,9 +21,13 @@ export class IntervieweeComponent implements OnInit {
   remark = "";
   tableSettings = IntervieweeTableSetting.setting;
   intevieweeList = [];
+  loginEmpId = "";
+  loginEmpRoleId = "";
   button = "";
   constructor(private sharedService : SharedService,private layoutComponent : LayoutComponent) { 
     this.layoutComponent.setTitle("Interviewee");
+    this.loginEmpId = localStorage.getItem("loginEmpId")
+    this.loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
     this.button = localStorage.getItem("button");
   }
 
@@ -33,7 +37,8 @@ export class IntervieweeComponent implements OnInit {
 
   getIntervieweeList(){
     let jsonData = {
-
+      loginEmpId: this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData, "interviewee")
     .subscribe(

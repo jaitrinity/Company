@@ -10,7 +10,7 @@ export class PoTableSettings {
               edit : false,
               delete : false,
               custom: [
-                { name: 'viewPO', title: 'View PO'},
+                { name: 'viewPO', title: '<i class="fas fa-eye" title="View"></i>'},
               ],
             },
             pager :{

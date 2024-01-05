@@ -166,6 +166,26 @@ ng2-smart-table .ng2-smart-title{
 .mat-simple-snackbar-action {
     color: white !important;
 }
+/* input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+} */
+
+.mat-form-field {
+    .mat-form-field-label-wrapper {
+      .mat-form-field-label {
+        pointer-events: auto;
+      }
+    }
+}
 
 
 

@@ -1,0 +1,59 @@
+<div class="row" style="margin-top: 10px;" *ngIf="false">
+    <div class="col-md-3">
+        <label class="tr-color">From Date <span title="Reset from date" (click) = "filterStartDate = ''"><i class="fas fa-refresh" aria-hidden="true"></i></span></label> 
+        <input type="date" class="form-control" [(ngModel)]="filterStartDate" (change)="filterEndDate = ''">
+    </div>
+    <div class="col-md-3">
+        <label class="tr-color">To Date <span title="Reset to date" (click) = "filterEndDate = ''"><i class="fas fa-refresh" aria-hidden="true"></i></span></label>
+        <input type="date" class="form-control"  [(ngModel)]="filterEndDate" [min]="filterStartDate">
+    </div>
+    <div class="col-md-3">
+        <label style="color: transparent;display: block">filter</label>
+        <button class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="getAttendanceList()">
+            <i class="fa fa-filter" aria-hidden="true"></i> Filter
+        </button>
+        &nbsp;
+      <button class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" [disabled] = "attandanceList.length == 0"
+      (click)="exportData()">
+        <i class="fa fa-download"></i> Export 
+      </button>
+    </div>
+</div>
+<div class="row" style="margin-top: 10px;">
+  <mat-form-field class="col-md-3">
+    <mat-label class="tr-color">From Date <span title="Reset from date" (click) = "filterStartDate = ''"><i class="fas fa-refresh" aria-hidden="true"></i></span></mat-label>
+    <input matInput [(ngModel)]="filterStartDate" [matDatepicker]="startDate" (dateChange)="filterEndDate = ''" readonly>
+    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="col-md-3">
+    <mat-label class="tr-color">To Date <span title="Reset to date" (click) = "filterEndDate = ''"><i class="fas fa-refresh" aria-hidden="true"></i></span></mat-label>
+    <input matInput [(ngModel)]="filterEndDate" [matDatepicker]="toDate" [min]="filterStartDate" readonly>
+    <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker #toDate></mat-datepicker>
+  </mat-form-field>
+
+  <div class="col-md-3">
+      <button class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="getAttendanceList()">
+          <i class="fa fa-filter" aria-hidden="true"></i> Filter
+      </button>
+      &nbsp;
+    <button class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" [disabled] = "attandanceList.length == 0"
+    (click)="exportData()">
+      <i class="fa fa-download"></i> Export 
+    </button>
+  </div>
+</div>
+<br>
+<div class="col-md-12" *ngIf="inProgress">
+  <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+  <div class="text-center text-warning">Please Wait</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+      <ng2-smart-table [settings]="attendanceTableSettings" [source]="attandanceList"></ng2-smart-table>
+    </div>
+</div>

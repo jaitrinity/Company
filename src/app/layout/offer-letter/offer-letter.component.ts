@@ -24,6 +24,8 @@ export class OfferLetterComponent implements OnInit {
   doj = "";
   lpa = "";
   todayDate : Date;
+  loginEmpId = "";
+  loginEmpRoleId = "";
   button = "";
   inProgress : boolean = false;
   inProgress1 : boolean = false;
@@ -32,6 +34,8 @@ export class OfferLetterComponent implements OnInit {
   constructor(private sharedService : SharedService,private layoutComponent : LayoutComponent) { 
     this.layoutComponent.setTitle("Offer Letter");
     this.todayDate = new Date();
+    this.loginEmpId = localStorage.getItem("loginEmpId")
+    this.loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
     this.button = localStorage.getItem("button");
   }
 
@@ -41,7 +45,8 @@ export class OfferLetterComponent implements OnInit {
   }
   getSelectedIntervieweeList(){
     let jsonData = {
-      loginEmpId : ""
+      loginEmpId : this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"selectedInterviewee")
     .subscribe(
@@ -63,7 +68,8 @@ export class OfferLetterComponent implements OnInit {
   }
   getAllOfferLetter(){
     let jsonData = {
-      loginEmpId : ""
+      loginEmpId : this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"offerLetter")
     .subscribe(

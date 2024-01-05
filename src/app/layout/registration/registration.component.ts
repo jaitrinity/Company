@@ -31,12 +31,16 @@ export class RegistrationComponent implements OnInit {
   telephoneAllowance = "";
   specialAllowance = "";
   otherAllowance = "";
+  loginEmpId = "";
+  loginEmpRoleId = "";
   button = "";
   todayDate : Date;
   dobMinDate : Date;
   dobMaxDate : Date;
   constructor(private sharedService : SharedService, private layoutComponent : LayoutComponent) { 
     this.layoutComponent.setTitle("Registration");
+    this.loginEmpId = localStorage.getItem("loginEmpId")
+    this.loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
     this.button = localStorage.getItem("button");
     this.todayDate = new Date();
     const currentYear = new Date().getFullYear();
@@ -50,7 +54,8 @@ export class RegistrationComponent implements OnInit {
 
   getOfferApprovedEmp(){
     let jsonData = {
-      loginEmpId : ""
+      loginEmpId : this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"offerApproved")
     .subscribe(

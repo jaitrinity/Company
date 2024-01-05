@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-layout',
@@ -12,38 +13,55 @@ export class LayoutComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
+  menuList = [];
   loginEmpId = "";
   loginEmpName = "";
   loginEmpRoleId = "";
   isAdmin : boolean = false;
   isEmployee : boolean = false;
   isFinance : boolean = false;
-  constructor(private router : Router,private _snackBar: MatSnackBar, private title : Title) { 
+  constructor(private sharedService : SharedService, private router : Router,private _snackBar: MatSnackBar, private title : Title) { 
     this.loginEmpId = localStorage.getItem("loginEmpId");
     this.loginEmpName = localStorage.getItem("loginEmpName");
-    let loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
-    if(loginEmpRoleId == '2'){
-      this.isEmployee = true;
-      this.router.navigate(['/layout/leave']);
+    this.loginEmpRoleId = localStorage.getItem("loginEmpRoleId");
+    if(this.loginEmpRoleId == "1"){
+      this.isAdmin = true;
+      this.router.navigate(['/layout/registration']);
     }
-    else if(loginEmpRoleId == '3'){
+    else if(this.loginEmpRoleId == '3'){
       this.isFinance = true;
       this.router.navigate(['/layout/invoice']);
     }
     else{
-      this.isAdmin = true;
-      this.router.navigate(['/layout/registration']);
+      this.isEmployee = true;
+      this.router.navigate(['/layout/leave']);
     }
   }
 
   ngOnInit(): void {
+    this.getHeaderMenuList();
+  }
+
+  getHeaderMenuList(){
+    let jsonData = {
+      loginEmpId:this.loginEmpId,
+      loginEmpRoleId:this.loginEmpRoleId
+    }
+    this.sharedService.getAllListBySelectType(jsonData, "headerMenu")
+    .subscribe(
+      (result)=>{
+        this.menuList = result;
+      },
+      (error)=>{
+
+      }
+    )
   }
 
   setTitle(pageTitle){
     this.title.setTitle("Trinity - "+pageTitle)
   }
 
-  
   openSnackBar(message: string, status : number) {
     let panalClassArr = ['text-white'];
     // Error

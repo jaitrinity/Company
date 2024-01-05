@@ -24,6 +24,7 @@ export class LeaveComponent implements OnInit {
   button = "";
   empList = [];
   leaveList = [];
+  leaveBalance = "";
   tableSettings = LeaveTableSettings.settings
   todayDate : Date;
   isAdmin : boolean = false;
@@ -48,7 +49,8 @@ export class LeaveComponent implements OnInit {
 
   getEmpForLeave(){
     let jsonData = {
-
+      loginEmpId: this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
     }
     this.sharedService.getAllListBySelectType(jsonData,"leaveEmp")
     .subscribe(
@@ -70,6 +72,7 @@ export class LeaveComponent implements OnInit {
     .subscribe(
       (result)=>{
         this.leaveList = result.leaveList;
+        this.leaveBalance = result.leaveBalance;
       },
       (error)=>{
         this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("getAllLeaves"),0);

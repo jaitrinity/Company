@@ -1,0 +1,34 @@
+<br>
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Prospect
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row" style="margin-top: 10px;">
+        <mat-form-field class="col-md-3">
+          <mat-label class="tr-color">From Date <span title="Reset from date" (click) = "filterStartDate = ''"><i class="fas fa-refresh" aria-hidden="true"></i></span></mat-label>
+          <input matInput [(ngModel)]="filterStartDate" [matDatepicker]="startDate" (dateChange)="filterEndDate = ''" readonly>
+          <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+      
+        <mat-form-field class="col-md-3">
+          <mat-label class="tr-color">To Date <span title="Reset to date" (click) = "filterEndDate = ''"><i class="fas fa-refresh" aria-hidden="true"></i></span></mat-label>
+          <input matInput [(ngModel)]="filterEndDate" [matDatepicker]="toDate" [min]="filterStartDate" readonly>
+          <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+      
+        <div class="col-md-3">
+          <button class="btn btn-sm text-white" [ngStyle]="{'background-color':button}"
+          (click)="downloadReport(3)">
+            <i class="fa fa-download"></i> Download 
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>

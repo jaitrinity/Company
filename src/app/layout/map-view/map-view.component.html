@@ -1,0 +1,77 @@
+<div class="row" style="margin-top: 10px;" *ngIf="false">
+    <div class="col-md-3">
+        <mat-label class="tr-color">Date *</mat-label>
+        <input type="date" class="form-control input-sm tom-border-radius" [(ngModel)]="filterDate" [max]="todayDate" (change)="viewMap()">
+    </div>
+    <div class="col-md-3">
+        <mat-label class="tr-color">Employee *</mat-label>
+        <select class="form-control input-sm tom-border-radius" [(ngModel)]="filterEmpId" (change)="viewMap()">
+            <option value="">Select</option>
+            <option value="{{emp.empId}}" *ngFor="let emp of employeeList" >{{emp.empName}}</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <table class="table table-bordered my-table" *ngIf="totalVisit !=''">
+            <tr>
+                <th>Visit Count</th> <th>Travel Distance in KM</th>
+            </tr>
+            <tr>
+                <td>{{totalVisit}}</td> <td>{{distanceTravel}}</td>
+            </tr>
+        </table>
+    </div>
+    <!-- <div class="col-md-2">
+        <label style="display: block;color: transparent;">0</label>
+        <span class="material-icons text-white" *ngIf="!isFullscreen" mat-raised-button [ngStyle]="{'background-color':button}" (click)="openFullscreen()">
+            fullscreen
+        </span>
+        <span class="material-icons text-white" *ngIf="isFullscreen" mat-raised-button [ngStyle]="{'background-color':button}" (click)="closeFullscreen()">
+            close_fullscreen
+        </span>
+    </div> -->
+</div>
+<div class="row" style="margin-top: 10px;">
+    <mat-form-field class="col-md-3">
+        <mat-label class="tr-color">Date *</mat-label>
+        <input matInput [(ngModel)]="filterDate" [matDatepicker]="dobPicker" [max]="todayDate" placeholder="Date" (dateChange)="viewMap()" readonly>
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker #dobPicker></mat-datepicker>
+    </mat-form-field>
+    
+    <mat-form-field class="col-md-3">
+        <mat-label class="tr-color">Employee *</mat-label>
+        <mat-select [(ngModel)]="filterEmpId" (selectionChange)="viewMap()">
+            <mat-option value="">Select</mat-option>
+            <mat-option [value]="emp.empId" *ngFor="let emp of employeeList">{{emp.empName}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="col-md-4">
+        <table class="table table-bordered my-table" *ngIf="totalVisit !=''">
+            <tr>
+                <th>Visit Count</th> <th>Travel Distance in KM</th>
+            </tr>
+            <tr>
+                <td>{{totalVisit}}</td> <td>{{distanceTravel}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br>
+<div class="col-md-12" *ngIf="inProgress">
+    <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+    <div class="text-center text-warning">Please Wait</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapReady)="onMapReady($event)">
+            <agm-direction *ngFor="let map of mapViewList" 
+                [origin]="map.origin" 
+                [destination]="map.destination" 
+                [renderOptions]="map.renderOptions" 
+                [markerOptions]="map.markerOptions">
+            </agm-direction>
+        </agm-map>
+    </div>
+</div>

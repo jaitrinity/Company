@@ -1,0 +1,24 @@
+agm-map {
+    height: 450px;
+}
+.my-table{
+    margin-bottom: 0px !important;
+}
+.my-table tr th, .my-table tr td{
+    padding: 5px !important;
+}
+.material-icons{
+    cursor: pointer;
+}
+/* input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+} */
