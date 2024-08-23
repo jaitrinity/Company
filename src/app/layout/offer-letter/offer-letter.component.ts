@@ -18,6 +18,7 @@ export class OfferLetterComponent implements OnInit {
   name = "";
   mobile = "";
   emailId = "";
+  officeLocation = "";
   addLine1 = "";
   addLine2 = "";
   designation = "";
@@ -96,6 +97,10 @@ export class OfferLetterComponent implements OnInit {
       this.alertMsg = "Please enter email id";
       return false;
     }
+    else if(this.officeLocation == ""){
+      this.alertMsg = "Please select location";
+      return false;
+    }
     else if(this.addLine1 == ""){
       this.alertMsg = "Please enter Address Line 1";
       return false;
@@ -129,6 +134,7 @@ export class OfferLetterComponent implements OnInit {
       name : this.name,
       mobile : this.mobile,
       emailId : this.emailId,
+      officeLocation: this.officeLocation,
       addLine1 : this.addLine1,
       addLine2 : this.addLine2,
       designation : this.designation,
@@ -196,6 +202,7 @@ export class OfferLetterComponent implements OnInit {
     this.name = "";
     this.mobile = "";
     this.emailId = "";
+    this.officeLocation = "";
     this.addLine1 = "";
     this.addLine2 = "";
     this.designation = "";

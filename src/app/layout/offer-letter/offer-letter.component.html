@@ -60,6 +60,16 @@
                     <div class="row">
                         <div class="col-md-4">
                             <mat-form-field>
+                                <mat-label class="tr-color">Location *</mat-label>
+                                <mat-select [(ngModel)]="officeLocation">
+                                    <mat-option value="">Select</mat-option>
+                                    <mat-option value="Noida">Noida</mat-option>
+                                    <mat-option value="Ahmedabad">Ahmedabad</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
                                 <mat-label class="tr-color">Address Line 1 *</mat-label>
                                 <input matInput [(ngModel)]="addLine1" placeholder="Address Line 1">
                             </mat-form-field>

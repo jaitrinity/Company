@@ -182,7 +182,8 @@ export class LeaveComponent implements OnInit {
         leaveId : this.viewLeaveId,
         status : statusType
       }
-      this.sharedService.updateDataByUpdateType(jsonData,"leaveStatus")
+      // this.sharedService.updateDataByUpdateType(jsonData,"leaveStatus")
+      this.sharedService.updateLeaveStatus(jsonData)
       .subscribe(
         (result)=>{
           if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){

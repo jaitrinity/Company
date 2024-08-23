@@ -35,6 +35,10 @@ export class SharedService {
     return this.http.post<any>(this.appUrl+"updateInTable.php?updateType="+updateType,jsonData);
   }
 
+  public updateLeaveStatus(jsonData : any) : Observable<any>{
+    return this.http.post<any>(this.appUrl+"updateLeaveStatus.php",jsonData);
+  }
+
   public generateInvoice(jsonData : any) : Observable<any>{
     return this.http.post<any>(this.appUrl+"generateInvoice.php",jsonData);
   }
