@@ -87,8 +87,8 @@
             </mat-form-field>
             <input accept=".jpg,.jpeg,.png,.pdf" hidden (change)="changeListener($event,1)" #panFile type="file">
         </div>
-    </div>
-    <div class="row">
+    <!-- </div>
+    <div class="row"> -->
         <div class="col-md-3">
             <mat-form-field>
                 <mat-label class="tr-color">Aadhar *</mat-label>
@@ -104,6 +104,17 @@
                 </button>
             </mat-form-field>
             <input accept=".jpg,.jpeg,.png,.pdf" hidden (change)="changeListener($event,2)" #aadharFile type="file">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">RM Name *</mat-label>
+                <mat-select [(ngModel)]="rmId">
+                    <mat-option value="">Select</mat-option>
+                    <mat-option [value]="el.empId" *ngFor="let el of rmEmpList">{{el.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </div>
 </fieldset>

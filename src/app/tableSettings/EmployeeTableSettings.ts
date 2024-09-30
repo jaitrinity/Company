@@ -22,7 +22,8 @@ export class EmployeeTableSetting{
         },
         columns: {
           empName: {
-            title: 'Emp name'
+            title: 'Emp name',
+            width:'120px'
           },
           // roleName : {
           //   title : "Role"
@@ -32,7 +33,8 @@ export class EmployeeTableSetting{
             width:'100px'
           },
           emailId: {
-            title: 'Email Id'
+            title: 'Email Id',
+            width:'120px'
           },
           dob: {
             title: 'DOB',
@@ -65,9 +67,12 @@ export class EmployeeTableSetting{
               return "<a href='"+row.panAttachment+"' target='_blank'>"+row.pan+"</a>";
             }
           },
+          rmName: {
+            title: 'RM Name'
+          },
           leaveBalance:{
-            title: 'LB',
-            width:'50px',
+            title: 'Leave Bal',
+            width:'70px',
           },
           
           // basic : {
@@ -94,10 +99,10 @@ export class EmployeeTableSetting{
           // salaryStatus:{
           //   title : "Salary Status"
           // },
-          activeStatus:{
-            title : "Active Status",
-            width:'100px'
-          },
+          // activeStatus:{
+          //   title : "Active Status",
+          //   width:'100px'
+          // },
           isActive:{
             title: 'Status',
             type: 'custom',

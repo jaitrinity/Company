@@ -13,6 +13,8 @@ export class RegistrationComponent implements OnInit {
   isInterviewee : boolean = false;
   inProgress : boolean = false;
   offerApprovedList = [];
+  rmId = "";
+  rmEmpList = []
   offerId = "";
   name = "";
   fatherHusbandName = "";
@@ -50,6 +52,23 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOfferApprovedEmp();
+    this.getAllRmEmp();
+  }
+
+  getAllRmEmp(){
+    let jsonData = {
+      loginEmpId : this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
+    }
+    this.sharedService.getAllListBySelectType(jsonData,"allRmEmp")
+    .subscribe(
+      (result)=>{
+        this.rmEmpList = result.rmEmpList;
+      },
+      (error)=>{
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("allEmp"),0);
+      }
+    )
   }
 
   getOfferApprovedEmp(){
@@ -196,6 +215,10 @@ export class RegistrationComponent implements OnInit {
       this.alertMsg = "Please attach Aadhar attachment";
       return false;
     }
+    else if(this.rmId == ""){
+      this.alertMsg = "Please select a RM name";
+      return false;
+    }
     else if(this.basic == ""){
       this.alertMsg = "Please enter Basic value";
       return false;
@@ -259,6 +282,7 @@ export class RegistrationComponent implements OnInit {
       panStr : this.panStr,
       aadhar : this.aadhar,
       aadharStr : this.aadharStr,
+      rmId: this.rmId,
       basic : this.basic,
       retentionBonus : this.retentionBonus,
       hsr : this.hsr,

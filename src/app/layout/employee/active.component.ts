@@ -6,6 +6,7 @@ import { EmployeeComponent } from './employee.component';
   selector: 'active-view',
   template: `
     <div>
+      {{rowData.activeStatus}} &nbsp;
       <button class='mybtn' *ngIf="rowData.isActive == 1" (click)="employeeAction()">
         <i class="fas fa-times" title="Deactive"> </i> 
       </button>
