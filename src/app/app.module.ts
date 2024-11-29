@@ -38,6 +38,7 @@ import { WorkInProgressComponent } from './work-in-progress/work-in-progress.com
 import { AttendanceComponent } from './layout/attendance/attendance.component';
 import { ReportComponent } from './layout/report/report.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { AssetComponent } from './layout/asset/asset.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MapViewComponent,
     WorkInProgressComponent,
     AttendanceComponent,
-    ReportComponent
+    ReportComponent,
+    AssetComponent
   ],
   entryComponents: [ActiveComponent],
   imports: [

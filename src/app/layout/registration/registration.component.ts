@@ -66,7 +66,7 @@ export class RegistrationComponent implements OnInit {
         this.rmEmpList = result.rmEmpList;
       },
       (error)=>{
-        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("allEmp"),0);
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("allRmEmp"),0);
       }
     )
   }

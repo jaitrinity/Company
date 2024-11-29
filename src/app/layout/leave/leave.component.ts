@@ -115,6 +115,7 @@ export class LeaveComponent implements OnInit {
       toDate : this.toDate,
       reason : this.reason
     }
+    // console.log(JSON.stringify(jsonData));
     this.inProgress = true;
     this.sharedService.insertDataByInsertType(jsonData,"saveLeave")
     .subscribe(
@@ -158,12 +159,20 @@ export class LeaveComponent implements OnInit {
   }
 
   viewLeaveId = "";
+  viewEmpId = "";
+  viewFromDate = "";
+  viewToDate = "";
   viewReason = "";
   viewLeaveStatus = "";
+  viewActivityId = "";
   viewLeave(evt){
     this.viewLeaveId = evt.data.id;
+    this.viewEmpId = evt.data.empId;
+    this.viewFromDate = evt.data.fromDate;
+    this.viewToDate = evt.data.toDate;
     this.viewReason = evt.data.reason;
     this.viewLeaveStatus = evt.data.status;
+    this.viewActivityId = evt.data.activityId;
     this.openAnyModal("viewLeaveModal");
   }
 
@@ -202,6 +211,38 @@ export class LeaveComponent implements OnInit {
         }
       )
     }
+  }
+
+  changeLeaveData(){
+    let jsonData = {
+      leaveId: this.viewLeaveId,
+      empId: this.viewEmpId,
+      fromDate: this.viewFromDate,
+      toDate: this.viewToDate,
+      reason: this.viewReason,
+      activityId: this.viewActivityId
+    }
+    // console.log(JSON.stringify(jsonData));
+    this.inProgress = true;
+    this.sharedService.insertDataByInsertType(jsonData,"updateLeave")
+    .subscribe(
+      (result)=>{
+        if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
+          this.layoutComponent.openSnackBar(result.responseDesc,1);
+          this.closeAnyModal("viewLeaveModal");
+          this.makeAsDefault();
+          this.getAllLeaves();
+        }
+        else{
+          this.layoutComponent.openSnackBar(result.responseDesc,2);
+        }
+        this.inProgress = false;
+        
+      },
+      (error)=>{
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("submitLeave"),0);
+      }
+    )
   }
 
   changeSelected(e){

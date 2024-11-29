@@ -15,6 +15,7 @@ import { MapViewComponent } from './layout/map-view/map-view.component';
 import { WorkInProgressComponent } from './work-in-progress/work-in-progress.component';
 import { AttendanceComponent } from './layout/attendance/attendance.component';
 import { ReportComponent } from './layout/report/report.component';
+import { AssetComponent } from './layout/asset/asset.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
     { path: 'map-view', component: MapViewComponent },
     { path: 'attendance', component: AttendanceComponent },
     { path: 'report', component: ReportComponent },
+    { path: 'asset', component: AssetComponent },
     { path: '**', component: WorkInProgressComponent }
 
   ]}

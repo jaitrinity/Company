@@ -56,10 +56,29 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label class="tr-color">From Date *</mat-label>
+                            <input matInput [(ngModel)]="viewFromDate" [matDatepickerFilter]="myFilter" [matDatepicker]="viewFromDatePicker" placeholder="From Date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="viewFromDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #viewFromDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+               
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label class="tr-color">To Date *</mat-label>
+                            <input matInput [(ngModel)]="viewToDate" [matDatepickerFilter]="myFilter" [matDatepicker]="viewToDatePicker" [min]="viewFromDate" placeholder="To Date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="viewToDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #viewToDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <mat-form-field>
                             <mat-label class="tr-color">Reason *</mat-label>
-                            <textarea matInput [(ngModel)]="viewReason" placeholder="Reason" rows="5" readonly></textarea>
+                            <textarea matInput [(ngModel)]="viewReason" placeholder="Reason" rows="5" [readonly]="viewLeaveStatus != '0'"></textarea>
                         </mat-form-field>
                     </div>
                 </div>
@@ -76,9 +95,13 @@
                         </button> &nbsp;
                         <button (click)="changeLeaveStatus(2)" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
                             Reject
-                        </button>
+                        </button> &nbsp;
+
+                        <button (click)="changeLeaveData()" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
+                            Save
+                        </button> 
                     </div>
-                    <div class="col-md-12" *ngIf="viewLeaveStatus == '1'">
+                    <!-- <div class="col-md-12" *ngIf="viewLeaveStatus == '1'">
                         <button (click)="changeLeaveStatus(2)" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
                             Reject
                         </button>
@@ -87,7 +110,13 @@
                         <button (click)="changeLeaveStatus(1)" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
                             Approve
                         </button>
-                    </div>
+                    </div> -->
+                </div>
+
+                <div class="row" *ngIf="!isAdmin && !inProgress && viewLeaveStatus == '0'">
+                    <button (click)="changeLeaveData()" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
+                        Save
+                    </button>
                 </div>
                 
             </div>
