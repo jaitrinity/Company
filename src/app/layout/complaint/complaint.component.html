@@ -1,0 +1,67 @@
+<div class="row"style="padding: 10px 0px">
+    <div class="col-md-12">
+        <button class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="getAllComplaint()">
+            <i class="fa fa-filter" aria-hidden="true"></i> Filter
+        </button>
+        &nbsp;
+        <button class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" [disabled] = "complaintList.length == 0"
+        (click)="exportData()">
+        <i class="fa fa-download"></i> Export 
+        </button>
+    </div>
+</div>
+<br>
+<div class="col-md-12" *ngIf="inProgress">
+    <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+    <div class="text-center text-warning">Please Wait</div>
+</div>
+<div class="row" >
+    <div class="col-md-12">
+      <ng2-smart-table [settings]="tableSettings" [source]="complaintList" (custom)="onCustomAction($event)"></ng2-smart-table>
+    </div>
+</div>
+
+<div id="complaintModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">Complaint - {{viewId}}</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('complaintModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img [src]="i" *ngFor="let i of picList" (click)="bigImage(i)"/>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Description</mat-label>
+                            <textarea matInput [(ngModel)]="description" placeholder="Description" rows="5" [readonly]="true"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <mat-label class="tr-color">Close Description *</mat-label>
+                            <textarea matInput [(ngModel)]="closeDescription" placeholder="Description" rows="5" [readonly]="viewStatus == '1'"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br>
+                <div class="row" *ngIf="isAdmin">
+                    <div class="col-md-12" >
+                        <button *ngIf="viewStatus == '0'" (click)="changeComplaintStatus(1)" class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>

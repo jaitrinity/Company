@@ -138,7 +138,9 @@ export class LeaveComponent implements OnInit {
   }
 
   makeAsDefault(){
-    this.empId = "";
+    if(this.isAdmin){
+      this.empId = "";
+    }
     this.fromDate = "";
     this.toDate = "";
     this.reason = "";

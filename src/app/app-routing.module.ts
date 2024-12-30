@@ -16,6 +16,7 @@ import { WorkInProgressComponent } from './work-in-progress/work-in-progress.com
 import { AttendanceComponent } from './layout/attendance/attendance.component';
 import { ReportComponent } from './layout/report/report.component';
 import { AssetComponent } from './layout/asset/asset.component';
+import { ComplaintComponent } from './layout/complaint/complaint.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
     { path: 'attendance', component: AttendanceComponent },
     { path: 'report', component: ReportComponent },
     { path: 'asset', component: AssetComponent },
+    { path: 'complaint', component: ComplaintComponent },
     { path: '**', component: WorkInProgressComponent }
 
   ]}

@@ -39,6 +39,7 @@ import { AttendanceComponent } from './layout/attendance/attendance.component';
 import { ReportComponent } from './layout/report/report.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AssetComponent } from './layout/asset/asset.component';
+import { ComplaintComponent } from './layout/complaint/complaint.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { AssetComponent } from './layout/asset/asset.component';
     WorkInProgressComponent,
     AttendanceComponent,
     ReportComponent,
-    AssetComponent
+    AssetComponent,
+    ComplaintComponent
   ],
   entryComponents: [ActiveComponent],
   imports: [

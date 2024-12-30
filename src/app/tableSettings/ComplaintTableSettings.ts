@@ -1,4 +1,4 @@
-export class AssetTableSettings {
+export class ComplaintTableSettings {
     public static settings = 
         {
             mode: 'external',
@@ -22,23 +22,17 @@ export class AssetTableSettings {
                 title: 'Id',
                 width : '100px'
             },
-            name : {
+            empName : {
                 title : "Name"
             },
-            assetCategory: {
-                title: 'Asset Category'
+            complaintType: {
+                title: 'Complaint Type'
             },
-            deviceName: {
-                title: 'Device Name'
+            raiseDate: {
+                title: 'Raise Date'
             },
-            serialNumber: {
-                title: 'Serial Number',
-            },
-            issueDate: {
-                title: 'Issue Date',
-            },
-            returnDate:{
-                title: 'Return Date'
+            closeDate: {
+                title: 'Close Date',
             },
             statusTxt: {
                 title: 'Status',
