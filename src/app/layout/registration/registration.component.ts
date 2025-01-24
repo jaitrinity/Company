@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
   fatherHusbandName = "";
   mobile = "";
   emailId = "";
+  designation = "";
   dob = "";
   doj = "";
   address = "";
@@ -93,6 +94,7 @@ export class RegistrationComponent implements OnInit {
     this.name = obj.name;
     this.mobile = obj.mobile;
     this.emailId = obj.emailId;
+    this.designation = obj.designation;
     this.doj = obj.doj;
   }
 
@@ -219,6 +221,10 @@ export class RegistrationComponent implements OnInit {
       this.alertMsg = "Please select a RM name";
       return false;
     }
+    else if(this.designation == ""){
+      this.alertMsg = "Please enter designation";
+      return false;
+    }
     else if(this.basic == ""){
       this.alertMsg = "Please enter Basic value";
       return false;
@@ -275,6 +281,7 @@ export class RegistrationComponent implements OnInit {
       mobile : this.mobile,
       password : window.btoa(this.mobile),
       emailId : this.emailId,
+      designation: this.designation,
       dob : this.dob,
       doj : this.doj,
       address : this.address,

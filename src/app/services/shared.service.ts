@@ -54,5 +54,9 @@ export class SharedService {
     return this.http.post<any>(this.appUrl+"sendJoiningLetterToMail.php",jsonData);
   }
 
+  public sendSalarySlipToMail(jsonData : any) : Observable<any>{
+    return this.http.post<any>(this.appUrl+"sendSalarySlipToMail.php",jsonData);
+  }
+
   
 }

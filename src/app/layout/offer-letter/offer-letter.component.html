@@ -31,12 +31,19 @@
                 <fieldset class="the-fieldset">
                     <legend class="the-legend">Personalia</legend>
                     <div class="row">
+                        <div class="col-md-3">
+                            <label class="tr-color">
+                                <input type="checkbox" [(ngModel)]="isInterviewee"> Is New Employee?
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
-                            <!-- <mat-form-field>
+                            <mat-form-field *ngIf="!isInterviewee">
                                 <mat-label class="tr-color">Name *</mat-label>
                                 <input matInput [(ngModel)]="name" placeholder="name">
-                            </mat-form-field> -->
-                            <mat-form-field>
+                            </mat-form-field>
+                            <mat-form-field *ngIf="isInterviewee">
                                 <mat-label class="tr-color">Name *</mat-label>
                                 <mat-select [(ngModel)]="intervieweeId" (selectionChange)="getInterviewData()">
                                     <mat-option value="">Select</mat-option>
@@ -47,13 +54,13 @@
                         <div class="col-md-4">
                             <mat-form-field>
                                 <mat-label class="tr-color">Mobile *</mat-label>
-                                <input matInput [(ngModel)]="mobile" placeholder="Mobile" OnlyNumber=true maxlength="10" readonly>
+                                <input matInput [(ngModel)]="mobile" placeholder="Mobile" OnlyNumber=true maxlength="10" [readonly]="isInterviewee">
                             </mat-form-field>
                         </div>
                         <div class="col-md-4">
                             <mat-form-field>
                                 <mat-label class="tr-color">Email Id *</mat-label>
-                                <input matInput [(ngModel)]="emailId" placeholder="Email Id" readonly>
+                                <input matInput [(ngModel)]="emailId" placeholder="Email Id" [readonly]="isInterviewee">
                             </mat-form-field>
                         </div>
                     </div>
@@ -95,7 +102,8 @@
                         <div class="col-md-4">
                             <mat-form-field>
                                 <mat-label class="tr-color">DOJ *</mat-label>
-                                <input matInput [(ngModel)]="doj" [matDatepicker]="dojPicker" [min]="todayDate" placeholder="Date of Joining" readonly>
+                                <!-- <input matInput [(ngModel)]="doj" [matDatepicker]="dojPicker" [min]="todayDate" placeholder="Date of Joining" readonly> -->
+                                <input matInput [(ngModel)]="doj" [matDatepicker]="dojPicker" placeholder="Date of Joining" readonly>
                                 <mat-datepicker-toggle matSuffix [for]="dojPicker"></mat-datepicker-toggle>
                                 <mat-hint>DD/MM/YYYY</mat-hint>
                                 <mat-datepicker #dojPicker></mat-datepicker>

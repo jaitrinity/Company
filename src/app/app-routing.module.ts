@@ -17,6 +17,7 @@ import { AttendanceComponent } from './layout/attendance/attendance.component';
 import { ReportComponent } from './layout/report/report.component';
 import { AssetComponent } from './layout/asset/asset.component';
 import { ComplaintComponent } from './layout/complaint/complaint.component';
+import { SalarySlipComponent } from './layout/salary-slip/salary-slip.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
     { path: 'report', component: ReportComponent },
     { path: 'asset', component: AssetComponent },
     { path: 'complaint', component: ComplaintComponent },
+    { path: 'salary-slip', component: SalarySlipComponent },
     { path: '**', component: WorkInProgressComponent }
 
   ]}

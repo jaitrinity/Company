@@ -36,10 +36,11 @@ export class EmployeeComponent implements OnInit {
   paidDays = 0;
   retentionBonus = "";
   professionTax = "";
-  // lossOfPay = "";
+  lossOfPay = "";
   otherDeductions = "";
   incomeTax = "";
   otherTax = "";
+  reimbursements = "";
   loginEmpId = "";
   loginEmpRoleId = "";
   button = "";
@@ -248,11 +249,13 @@ export class EmployeeComponent implements OnInit {
 
   viewId = "";
   viewEmpId = "";
+  viewMobile = "";
   employeeObj : any = {}
   viewEmployee(event){
     this.viewId = event.data.id;
     this.employeeObj = this.employeeList.filter(x => x.id === this.viewId)[0];
     this.viewEmpId = this.employeeObj.empId;
+    this.viewMobile = this.employeeObj.mobile;
     // this.month = this.employeeObj.lastMonthYear;
     this.month = this.dedMonth;
     this.getDeduction();
@@ -293,6 +296,10 @@ export class EmployeeComponent implements OnInit {
     //   this.alertMsg = "Please enter Other Tax";
     //   return false;
     // }
+    // else if(this.reimbursements == ""){
+    //   this.alertMsg = "Please enter Reimbursements";
+    //   return false;
+    // }
     return true;
   }
 
@@ -303,10 +310,11 @@ export class EmployeeComponent implements OnInit {
     }
     this.retentionBonus = this.retentionBonus == "" ? "0" : this.retentionBonus;
     this.professionTax = this.professionTax == "" ? "0" : this.professionTax;
-    // this.lossOfPay = this.lossOfPay == "" ? "0" : this.lossOfPay;
+    this.lossOfPay = this.lossOfPay == "" ? "0" : this.lossOfPay;
     this.otherDeductions = this.otherDeductions == "" ? "0" : this.otherDeductions;
     this.incomeTax = this.incomeTax == "" ? "0" : this.incomeTax;
     this.otherTax = this.otherTax == "" ? "0" : this.otherTax;
+    this.reimbursements = this.reimbursements == "" ? "0" : this.reimbursements;
     let jsonData = {
       empId : this.viewEmpId,
       basic : this.employeeObj.basic,
@@ -315,16 +323,18 @@ export class EmployeeComponent implements OnInit {
       paidDays : this.paidDays,
       retentionBonus : this.retentionBonus,
       professionTax : this.professionTax,
-      // lossOfPay : this.lossOfPay,
+      lossOfPay : this.lossOfPay,
       otherDeductions : this.otherDeductions,
       incomeTax : this.incomeTax,
-      otherTax : this.otherTax
+      otherTax : this.otherTax,
+      reimbursements : this.reimbursements
     }
     this.sharedService.insertDataByInsertType(jsonData,"deduction")
     .subscribe(
       (result) => {
         if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
-          this.layoutComponent.openSnackBar(result.responseDesc,1);
+          // this.layoutComponent.openSnackBar(result.responseDesc,1);
+          this.sendSalarySlipToMail();
           this.makeAsDefault();
           this.closeAnyModal("viewEmployeeModal");
           this.getEmployeeList();
@@ -339,6 +349,27 @@ export class EmployeeComponent implements OnInit {
     )
   }
 
+  sendSalarySlipToMail(){
+    let jsonData = {
+      empId: this.viewEmpId,
+      monthYear: this.month
+    }
+    this.sharedService.sendSalarySlipToMail(jsonData)
+    .subscribe(
+      (result)=>{
+        if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
+          this.layoutComponent.openSnackBar(result.responseDesc,1);
+        }
+        else{
+          this.layoutComponent.openSnackBar(result.responseDesc,2);
+        }
+      },
+      (error)=>{
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("sendSalarySlipToMail"),0);
+      }
+    )
+  }
+
   makeAsDefault(){
     this.employeeObj = {}
     this.deductionObj = {};
@@ -346,10 +377,11 @@ export class EmployeeComponent implements OnInit {
     this.paidDays = 0;
     this.retentionBonus = "";
     this.professionTax = "";
-    // this.lossOfPay = "";
+    this.lossOfPay = "";
     this.otherDeductions = "";
     this.incomeTax = "";
     this.otherTax = "";
+    this.reimbursements = "";
     this.uploadFileName = "";
     this.previewDedunctionList = [];
   }
@@ -358,7 +390,8 @@ export class EmployeeComponent implements OnInit {
     // let jsonData = {
     //   empId : this.viewEmpId
     // }
-    let url = environment.appUrl+"generateSS.php?empId="+this.viewEmpId+"&monthYear="+this.month;
+    // let url = environment.appUrl+"generateSS.php?empId="+this.viewEmpId+"&monthYear="+this.month;
+    let url = environment.appUrl+"/files/SalarySlip_"+this.month+"/"+this.viewMobile+".pdf";
     window.open(url);
 
   }
@@ -454,10 +487,11 @@ export class EmployeeComponent implements OnInit {
         name : this.importData[i].Name,
         retentionBonus : this.importData[i].RetentionBonus == null ? 0 : this.importData[i].RetentionBonus,
         professionTax : this.importData[i].ProfessionTax == null ? 0 : this.importData[i].ProfessionTax,
-        // lossOfPay : this.importData[i].LossOfPay == null ? 0 : this.importData[i].LossOfPay,
+        lossOfPay : this.importData[i].LossOfPay == null ? 0 : this.importData[i].LossOfPay,
         otherDeductions : this.importData[i].OtherDeductions == null ? 0 : this.importData[i].OtherDeductions,
         incomeTax : this.importData[i].IncomeTax == null ? 0 : this.importData[i].IncomeTax,
-        otherTax : this.importData[i].OtherTax == null ? 0 : this.importData[i].OtherTax
+        otherTax : this.importData[i].OtherTax == null ? 0 : this.importData[i].OtherTax,
+        reimbursements : this.importData[i].Reimbursements == null ? 0 : this.importData[i].Reimbursements
       }
       this.previewDedunctionList.push(json);
     }

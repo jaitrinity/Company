@@ -116,6 +116,12 @@
                 </mat-select>
             </mat-form-field>
         </div>
+        <div class="col-md-3">
+            <mat-form-field>
+                <mat-label class="tr-color">Designation *</mat-label>
+                <input matInput [(ngModel)]="designation" placeholder="Designation" [readonly]="isInterviewee">
+            </mat-form-field>
+        </div>
     </div>
 </fieldset>
 <fieldset class="the-fieldset">

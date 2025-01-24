@@ -1,9 +1,9 @@
 <div class="row" style="padding: 10px 0px">
-  <div class="col-md-12">
+  <!-- <div class="col-md-12">
     <mat-chip-list #chipList aria-label="Fruit selection">
       <mat-chip color="white" selected (click)="changeSelected($event)">Import Deduction<mat-icon>add_circle_outline</mat-icon></mat-chip>
     </mat-chip-list>
-  </div>
+  </div> -->
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -259,49 +259,62 @@
                         <input matInput [(ngModel)]="paidDays" readonly>
                     </mat-form-field>
                   </div>
+                
                   <div class="col-md-3">
-                      <mat-form-field>
-                          <mat-label class="tr-color">Retention bonus *</mat-label>
-                          <input matInput [(ngModel)]="retentionBonus" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
-                          <input matInput [value]="deductionObj.retentionBonus" *ngIf="(deductionObj | json) != '{}'" readonly>
-                      </mat-form-field>
+                    <mat-form-field>
+                        <!-- <mat-label class="tr-color">Other Deductions *</mat-label> -->
+                        <mat-label class="tr-color">TDS *</mat-label>
+                        <input matInput [(ngModel)]="otherDeductions" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.otherDeductions" *ngIf="(deductionObj | json) != '{}'" readonly>
+                    </mat-form-field>
                   </div>
+
                   <div class="col-md-3">
-                      <mat-form-field>
-                          <mat-label class="tr-color">Profession Tax *</mat-label>
-                          <input matInput [(ngModel)]="professionTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
-                          <input matInput [value]="deductionObj.professionTax" *ngIf="(deductionObj | json) != '{}'" readonly>
-                      </mat-form-field>
+                    <mat-form-field>
+                        <mat-label class="tr-color">Loss of Pay(Leave)</mat-label>
+                        <input matInput [(ngModel)]="lossOfPay" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.lossOfPay" *ngIf="(deductionObj | json) != '{}'" readonly>
+                    </mat-form-field>
                   </div>
-             
-                  <!-- <div class="col-md-3">
-                      <mat-form-field>
-                          <mat-label class="tr-color">Loss of Pay(Leave) *</mat-label>
-                          <input matInput [(ngModel)]="lossOfPay" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
-                          <input matInput [value]="deductionObj.lossOfPay" *ngIf="(deductionObj | json) != '{}'" readonly>
-                      </mat-form-field>
-                  </div> -->
+
                   <div class="col-md-3">
-                      <mat-form-field>
-                          <mat-label class="tr-color">Other Deductions *</mat-label>
-                          <input matInput [(ngModel)]="otherDeductions" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
-                          <input matInput [value]="deductionObj.otherDeductions" *ngIf="(deductionObj | json) != '{}'" readonly>
-                      </mat-form-field>
+                    <mat-form-field>
+                        <mat-label class="tr-color">Reimbursements</mat-label>
+                        <input matInput [(ngModel)]="reimbursements" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.reimbursements" *ngIf="(deductionObj | json) != '{}'" readonly>
+                    </mat-form-field>
                   </div>
-              
+
                   <div class="col-md-3">
-                      <mat-form-field>
-                          <mat-label class="tr-color">Income Tax *</mat-label>
-                          <input matInput [(ngModel)]="incomeTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
-                          <input matInput [value]="deductionObj.incomeTax" *ngIf="(deductionObj | json) != '{}'" readonly>
-                      </mat-form-field>
+                    <mat-form-field>
+                        <mat-label class="tr-color">Retention bonus</mat-label>
+                        <input matInput [(ngModel)]="retentionBonus" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.retentionBonus" *ngIf="(deductionObj | json) != '{}'" readonly>
+                    </mat-form-field>
                   </div>
+
                   <div class="col-md-3">
-                      <mat-form-field>
-                          <mat-label class="tr-color">Other Tax *</mat-label>
-                          <input matInput [(ngModel)]="otherTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
-                          <input matInput [value]="deductionObj.otherTax" *ngIf="(deductionObj | json) != '{}'" readonly>
-                      </mat-form-field>
+                    <mat-form-field>
+                        <mat-label class="tr-color">Profession Tax</mat-label>
+                        <input matInput [(ngModel)]="professionTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.professionTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Income Tax</mat-label>
+                        <input matInput [(ngModel)]="incomeTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.incomeTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-3">
+                    <mat-form-field>
+                        <mat-label class="tr-color">Other Tax</mat-label>
+                        <input matInput [(ngModel)]="otherTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.otherTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                    </mat-form-field>
                   </div>
               </div>
             </fieldset>
@@ -319,7 +332,6 @@
                 </button>
                 </div>
               </ng-template>
-
             </div>
             <!-- <div class="row">
               <div class="col-md-12">

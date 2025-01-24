@@ -139,7 +139,13 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="inProgress">
+                        <div class="col-md-12">
+                            <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+                            <div class="text-center text-warning">Please Wait</div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="!inProgress">
                         <div class="col-md-12">
                             <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="changeIntervieweeStatus(1)">
                                 Selected

@@ -1,0 +1,19 @@
+<div class="row"style="padding: 10px 0px">
+  <div class="col-md-12">
+    <button class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" [disabled] = "slipList.length == 0"
+          (click)="exportData()">
+          <i class="fa fa-download"></i> Export 
+    </button>
+  </div>
+</div>
+
+<div class="col-md-12" *ngIf="inProgress">
+    <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+    <div class="text-center text-warning">Please Wait</div>
+</div>
+
+<div class="row" >
+    <div class="col-md-12">
+      <ng2-smart-table [settings]="tableSettings" [source]="slipList" (custom)="onCustomAction($event)"></ng2-smart-table>
+    </div>
+</div>

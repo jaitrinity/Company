@@ -40,6 +40,7 @@ import { ReportComponent } from './layout/report/report.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AssetComponent } from './layout/asset/asset.component';
 import { ComplaintComponent } from './layout/complaint/complaint.component';
+import { SalarySlipComponent } from './layout/salary-slip/salary-slip.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ComplaintComponent } from './layout/complaint/complaint.component';
     AttendanceComponent,
     ReportComponent,
     AssetComponent,
-    ComplaintComponent
+    ComplaintComponent,
+    SalarySlipComponent
   ],
   entryComponents: [ActiveComponent],
   imports: [

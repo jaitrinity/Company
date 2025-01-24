@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  appUrl : 'http://www.trinityapplab.in/Company/'
+  appUrl : 'https://www.trinityapplab.in/Company/'
 };
 
 /*

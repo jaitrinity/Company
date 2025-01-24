@@ -12,6 +12,7 @@ declare var $: any;
 })
 export class IntervieweeComponent implements OnInit {
 
+  inProgress : boolean = false;
   name = "";
   mobile = "";
   emailId = "";
@@ -155,6 +156,7 @@ export class IntervieweeComponent implements OnInit {
     else if(applyStatus == 2) sta = "Rejected";
     let isConfirm = confirm("Sure,You want to "+sta+" this.");
     if(isConfirm){
+      this.inProgress = true;
       let jsonData = {
         intervieweeId : this.viewId,
         remark : this.remark,
@@ -164,15 +166,18 @@ export class IntervieweeComponent implements OnInit {
       .subscribe(
         (result)=>{
           if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
+            this.inProgress = false;
             this.layoutComponent.openSnackBar(result.responseDesc,1);
             this.getIntervieweeList();
             this.closeAnyModal("viewIntervieweeModal");
           }
           else{
+            this.inProgress = false;
             this.layoutComponent.openSnackBar(result.responseDesc,2)
           }
         },
         (error)=>{
+          this.inProgress = false;
           this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("changeIntervieweeStatus"),0);
         }
       )

@@ -13,6 +13,7 @@ declare var $: any;
 })
 export class OfferLetterComponent implements OnInit {
 
+  isInterviewee : boolean = true;
   selectedIntervieweeList = [];
   intervieweeId = "";
   name = "";
@@ -129,6 +130,7 @@ export class OfferLetterComponent implements OnInit {
       this.layoutComponent.openSnackBar(this.alertMsg,2);
       return;
     }
+    if(this.isInterviewee == false) this.intervieweeId = "0";
     let jsonData = {
       intervieweeId : this.intervieweeId,
       name : this.name,
@@ -199,6 +201,7 @@ export class OfferLetterComponent implements OnInit {
   }
 
   makeAsDefault(){
+    this.isInterviewee = true;
     this.name = "";
     this.mobile = "";
     this.emailId = "";
