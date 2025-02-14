@@ -54,23 +54,34 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployeeList();
-    let currentMonth = this.datePipe.transform(new Date(),'MMM');
-    let currentYear = this.datePipe.transform(new Date(),'yyyy');
-    let previousYear = parseInt(currentYear) - 1;
-    let nextYear = parseInt(currentYear) + 1;
-    if(currentMonth == 'Jan' || currentMonth == 'Feb' || currentMonth == 'Mar'){
-      this.monthList = [
-        "Apr-"+previousYear,"May-"+previousYear,"Jun-"+previousYear,"Jul-"+previousYear,
-        "Aug-"+previousYear,"Sep-"+previousYear,"Oct-"+previousYear,"Nov-"+previousYear,
-        "Dec-"+previousYear,"Jan-"+currentYear,"Feb-"+currentYear,"Mar-"+currentYear
-      ]
-    }
-    else{
-      this.monthList = [
-        "Apr-"+currentYear,"May-"+currentYear,"Jun-"+currentYear,"Jul-"+currentYear,
-        "Aug-"+currentYear,"Sep-"+currentYear,"Oct-"+currentYear,"Nov-"+currentYear,
-        "Dec-"+currentYear,"Jan-"+nextYear,"Feb-"+nextYear,"Mar-"+nextYear
-      ]
+    this.getMonthList();
+    // let currentMonth = this.datePipe.transform(new Date(),'MMM');
+    // let currentYear = this.datePipe.transform(new Date(),'yyyy');
+    // let previousYear = parseInt(currentYear) - 1;
+    // let nextYear = parseInt(currentYear) + 1;
+    // if(currentMonth == 'Jan' || currentMonth == 'Feb' || currentMonth == 'Mar'){
+    //   this.monthList = [
+    //     "Apr-"+previousYear,"May-"+previousYear,"Jun-"+previousYear,"Jul-"+previousYear,
+    //     "Aug-"+previousYear,"Sep-"+previousYear,"Oct-"+previousYear,"Nov-"+previousYear,
+    //     "Dec-"+previousYear,"Jan-"+currentYear,"Feb-"+currentYear,"Mar-"+currentYear
+    //   ]
+    // }
+    // else{
+    //   this.monthList = [
+    //     "Apr-"+currentYear,"May-"+currentYear,"Jun-"+currentYear,"Jul-"+currentYear,
+    //     "Aug-"+currentYear,"Sep-"+currentYear,"Oct-"+currentYear,"Nov-"+currentYear,
+    //     "Dec-"+currentYear,"Jan-"+nextYear,"Feb-"+nextYear,"Mar-"+nextYear
+    //   ]
+    // }
+  }
+
+  getMonthList(){
+    for (var i = 0; i < 12; i++) {
+      var d = new Date();
+      d.setMonth(d.getMonth() - i);
+      var month = d.toLocaleString("default", { month: "short" });
+      var year = d.getFullYear();
+      this.monthList.push(month+"-"+year);
     }
   }
 
