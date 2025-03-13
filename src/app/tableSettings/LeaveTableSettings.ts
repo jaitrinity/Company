@@ -40,9 +40,10 @@ export class LeaveTableSettings{
               return new DatePipe('en-EN').transform(value, 'dd-MM-yyyy');
             }
           },
-        //   reason: {
-        //     title: 'Reason'
-        //   },
+          halfDay: {
+            title: 'Half Day',
+            width : '100px'
+          },
           leaveStatus: {
             title: 'Status',
             width : '100px'

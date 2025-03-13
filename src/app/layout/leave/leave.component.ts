@@ -17,6 +17,7 @@ export class LeaveComponent implements OnInit {
     return day !== 0 && day !== 6;
   };
   inProgress : boolean = false;
+  halfDay : boolean = false;
   empId = "";
   fromDate = "";
   toDate = "";
@@ -112,6 +113,7 @@ export class LeaveComponent implements OnInit {
       empId : this.empId,
       empName : objList[0].name,
       fromDate : this.fromDate,
+      halfDay: this.halfDay ? "Yes" : "No",
       toDate : this.toDate,
       reason : this.reason
     }
@@ -141,6 +143,7 @@ export class LeaveComponent implements OnInit {
     if(this.isAdmin){
       this.empId = "";
     }
+    this.halfDay = false;
     this.fromDate = "";
     this.toDate = "";
     this.reason = "";
@@ -164,6 +167,7 @@ export class LeaveComponent implements OnInit {
   viewEmpId = "";
   viewFromDate = "";
   viewToDate = "";
+  viewHalfDay : boolean = false;
   viewReason = "";
   viewLeaveStatus = "";
   viewActivityId = "";
@@ -172,6 +176,7 @@ export class LeaveComponent implements OnInit {
     this.viewEmpId = evt.data.empId;
     this.viewFromDate = evt.data.fromDate;
     this.viewToDate = evt.data.toDate;
+    this.viewHalfDay = evt.data.halfDay == "Yes" ? true : false;
     this.viewReason = evt.data.reason;
     this.viewLeaveStatus = evt.data.status;
     this.viewActivityId = evt.data.activityId;
@@ -221,6 +226,7 @@ export class LeaveComponent implements OnInit {
       empId: this.viewEmpId,
       fromDate: this.viewFromDate,
       toDate: this.viewToDate,
+      halfDay: this.viewHalfDay ? "Yes" : "No",
       reason: this.viewReason,
       activityId: this.viewActivityId
     }

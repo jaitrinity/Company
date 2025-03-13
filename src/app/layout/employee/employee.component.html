@@ -326,80 +326,17 @@
                   </button>
               </div>
               <ng-template #elseBlock>
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="downloadSalarySlip()">
-                    <mat-icon>download</mat-icon> PDF
-                </button>
+                    <mat-icon>download</mat-icon> Download Salary Slip
+                  </button>
+                  &nbsp;
+                  <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="sendSalarySlipToMail()">
+                    <mat-icon>repeat</mat-icon> Resend Salary Slip
+                  </button>
                 </div>
               </ng-template>
             </div>
-            <!-- <div class="row">
-              <div class="col-md-12">
-                <table border="1" class="table">
-                  <tr>
-                    <th rowspan="4">
-                      <img src = "assets/img/logo.jpg" width="100%"/>
-                    </th>
-                    <th colspan="3">
-                      TRINITY MOBILE APP LAB PVT. LTD.
-                    </th>
-                  </tr>
-                  <tr>
-                    <th colspan="3">
-                      Office No: C-313, Noida One, B-8,
-                    </th>
-                  </tr>
-                  <tr>
-                    <th colspan="3">
-                      Sector-62, Noida (UP) - 201309.
-                    </th>
-                  </tr>
-                  <tr>
-                    <th colspan="5">
-                      Pay Slip for the Month of  Jun-2019
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>Employee Name</th> <td>{{employeeObj.empName}}</td>
-                    <th>Paid days</th> <td>21</td>
-                  </tr>
-                  <tr>
-                    <th>Father/Husband Name</th> <td>{{employeeObj.fatherHusbandName}}</td>
-                    <th>DOJ</th> <td>{{employeeObj.doj}}</td>
-                  </tr>
-                  <tr>
-                    <th>DOB</th> <td>{{employeeObj.dob}}</td>
-                    <th>PAN No</th> <td>{{employeeObj.pan}}</td>
-                  </tr>
-                  <tr>
-                    <th>Earnings</th> <th>Amount</th> <th>Deductions</th> <th>Amount</th>
-                  </tr>
-                  <tr>
-                    <th>Basic</th> <td>{{employeeObj.basic}}</td> <th>Retention bonus</th> <th></th>
-                  </tr>
-                  <tr>
-                    <th>HRA</th> <td>{{employeeObj.hra}}</td> <th>Profession Tax</th> <th></th>
-                  </tr>
-                  <tr>
-                    <th>Conveyance Allowance</th> <td>{{employeeObj.conveyanceAllowance}}</td> <th>Loss of Pay(Leave)</th> <th></th>
-                  </tr>
-                  <tr>
-                    <th>Medical Allowance</th> <td>{{employeeObj.medicalAllowance}}</td> <th>Other Deductions</th> <th></th>
-                  </tr>
-                  <tr>
-                    <th>Telephone Allowance</th> <td>{{employeeObj.telephoneAllowance}}</td> <th>Income Tax</th> <th></th>
-                  </tr>
-                  <tr>
-                    <th>Special Allowance</th> <td>{{employeeObj.specialAllowance}}</td> <th></th> <th></th>
-                  </tr>
-                  <tr>
-                    <th>Other Allowance</th> <td>{{employeeObj.otherAllowance}}</td> <th>Total Deductions</th> <th></th>
-                  </tr>
-                  <tr>
-                    <th>Gross Salary</th> <th></th> <th>Net Salary</th> <th></th>
-                  </tr>
-                </table>
-              </div> -->
             </div> 
           <div class="modal-footer">
           </div>
