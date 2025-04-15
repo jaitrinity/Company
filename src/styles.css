@@ -179,6 +179,12 @@ ng2-smart-table .ng2-smart-title{
     width: auto;
 } */
 
+.holiday-table-div table thead tr th{
+    background-image: linear-gradient(to bottom right, #45a8f0, #a649e9);
+    color:white;
+    font-weight: 500;
+}
+
 .mat-form-field {
     .mat-form-field-label-wrapper {
       .mat-form-field-label {

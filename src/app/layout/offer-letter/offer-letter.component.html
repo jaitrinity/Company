@@ -27,7 +27,7 @@
                 <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('offerLetterModal')">Close</button>
             </div>
             <!-- det-modal-body -->
-            <div class="modal-body">
+            <div class="modal-body det-modal-body">
                 <fieldset class="the-fieldset">
                     <legend class="the-legend">Personalia</legend>
                     <div class="row">
@@ -117,6 +117,103 @@
                         </div>
                     </div>
                 </fieldset>
+
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Yearly</legend>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Earning *</mat-label>
+                                <input matInput [(ngModel)]="earningsY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Basic *</mat-label>
+                                <input matInput [(ngModel)]="basicY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">TDS *</mat-label>
+                                <input matInput [(ngModel)]="tdsY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Net Salary *</mat-label>
+                                <input matInput [(ngModel)]="netSalaryY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">HRA</mat-label>
+                                <input matInput [(ngModel)]="hraY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Conveyance Allowance</mat-label>
+                                <input matInput [(ngModel)]="conveyanceY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Laptop Allowance</mat-label>
+                                <input matInput [(ngModel)]="laptopY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Monthly</legend>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Earning *</mat-label>
+                                <input matInput [(ngModel)]="earningsM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Basic *</mat-label>
+                                <input matInput [(ngModel)]="basicM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">TDS *</mat-label>
+                                <input matInput [(ngModel)]="tdsM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Net Salary *</mat-label>
+                                <input matInput [(ngModel)]="netSalaryM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">HRA</mat-label>
+                                <input matInput [(ngModel)]="hraM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Conveyance Allowance</mat-label>
+                                <input matInput [(ngModel)]="conveyanceM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Laptop Allowance</mat-label>
+                                <input matInput [(ngModel)]="laptopM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                </fieldset>
                 
                 <div class="row" *ngIf="inProgress1">
                     <div class="col-md-12">
@@ -129,6 +226,207 @@
                     <div class="col-md-6">
                         <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="generateOfferLetter()">
                             Offer Letter
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editOfferLetterModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px !important;">
+                <h4 class="modal-title tr-color">Edit Offer Letter : {{id}}</h4>
+                <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('editOfferLetterModal')">Close</button>
+            </div>
+            <!-- det-modal-body -->
+            <div class="modal-body det-modal-body">
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Personalia</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Name *</mat-label>
+                                <input matInput [(ngModel)]="name" placeholder="name" [readonly]="true">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Mobile *</mat-label>
+                                <input matInput [(ngModel)]="mobile" placeholder="Mobile" OnlyNumber=true maxlength="10" [readonly]="true">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Email Id *</mat-label>
+                                <input matInput [(ngModel)]="emailId" placeholder="Email Id" [readonly]="true">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Location *</mat-label>
+                                <mat-select [(ngModel)]="officeLocation">
+                                    <mat-option value="">Select</mat-option>
+                                    <mat-option value="Noida">Noida</mat-option>
+                                    <mat-option value="Ahmedabad">Ahmedabad</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Address Line 1 *</mat-label>
+                                <input matInput [(ngModel)]="addLine1" placeholder="Address Line 1">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Address Line 2 *</mat-label>
+                                <input matInput [(ngModel)]="addLine2" placeholder="Address Line 2">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Offer</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Designation *</mat-label>
+                                <input matInput [(ngModel)]="designation" placeholder="Designation">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">DOJ *</mat-label>
+                                <input matInput [(ngModel)]="doj" [matDatepicker]="editDojPicker" placeholder="Date of Joining" readonly>
+                                <mat-datepicker-toggle matSuffix [for]="editDojPicker"></mat-datepicker-toggle>
+                                <mat-hint>DD/MM/YYYY</mat-hint>
+                                <mat-datepicker #editDojPicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label class="tr-color">CTC *</mat-label>
+                                <input matInput [(ngModel)]="lpa" placeholder="CTC" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Yearly</legend>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Earning *</mat-label>
+                                <input matInput [(ngModel)]="earningsY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Basic *</mat-label>
+                                <input matInput [(ngModel)]="basicY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">HRA</mat-label>
+                                <input matInput [(ngModel)]="hraY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Conveyance Allowance</mat-label>
+                                <input matInput [(ngModel)]="conveyanceY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Laptop Allowance</mat-label>
+                                <input matInput [(ngModel)]="laptopY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">TDS *</mat-label>
+                                <input matInput [(ngModel)]="tdsY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Net Salary *</mat-label>
+                                <input matInput [(ngModel)]="netSalaryY" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">Monthly</legend>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Earning *</mat-label>
+                                <input matInput [(ngModel)]="earningsM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Basic *</mat-label>
+                                <input matInput [(ngModel)]="basicM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">HRA</mat-label>
+                                <input matInput [(ngModel)]="hraM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Conveyance Allowance</mat-label>
+                                <input matInput [(ngModel)]="conveyanceM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Laptop Allowance</mat-label>
+                                <input matInput [(ngModel)]="laptopM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">TDS *</mat-label>
+                                <input matInput [(ngModel)]="tdsM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label class="tr-color">Net Salary *</mat-label>
+                                <input matInput [(ngModel)]="netSalaryM" OnlyNumber=true maxlength="10">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <div class="row" *ngIf="inProgress1">
+                    <div class="col-md-12">
+                        <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+                        <div class="text-center text-warning">Please Wait</div>
+                    </div>
+                </div>
+                
+                <div class="row" *ngIf="!inProgress1">
+                    <div class="col-md-6">
+                        <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="editOfferLetter()">
+                            Save Offer Letter
                         </button>
                     </div>
                 </div>

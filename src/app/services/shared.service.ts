@@ -28,7 +28,7 @@ export class SharedService {
   }
 
   public resendOfferLetterToMail(jsonData : any) : Observable<any>{
-    return this.http.post<any>(this.appUrl+"resendOfferLetter.php",jsonData);
+    return this.http.post<any>(this.appUrl+"regenerateOfferLetter.php",jsonData);
   }
 
   public updateDataByUpdateType(jsonData : any, updateType : string) : Observable<any>{
@@ -54,9 +54,16 @@ export class SharedService {
     return this.http.post<any>(this.appUrl+"sendJoiningLetterToMail.php",jsonData);
   }
 
-  public sendSalarySlipToMail(jsonData : any) : Observable<any>{
-    return this.http.post<any>(this.appUrl+"sendSalarySlipToMail.php",jsonData);
+  // public sendSalarySlipToMail(jsonData : any) : Observable<any>{
+  //   return this.http.post<any>(this.appUrl+"sendSalarySlipToMail.php",jsonData);
+  // }
+
+  public resendSalarySlipToMail(jsonData : any) : Observable<any>{
+    return this.http.post<any>(this.appUrl+"resendSalarySlipToMail.php",jsonData);
   }
 
+  public getHolidays(){
+    return this.http.get(this.appUrl+"holiday.php", {responseType: 'text'});
+  }
   
 }

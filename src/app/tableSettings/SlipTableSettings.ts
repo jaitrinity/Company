@@ -9,7 +9,7 @@ export class SlipTableSettings {
               edit : false,
               delete : false,
               custom: [
-                { name: 'viewRecord', title: '<i class="fas fa-eye" title="View"></i>'},
+                { name: 'viewRecord', title: '<i class="fas fa-download" title="Download Slip"></i>'},
                 // { name: 'activerecord', title: 'Activate' },
                 // { name: 'deactiverecord', title: 'Deactivate' },
               ],
@@ -25,10 +25,10 @@ export class SlipTableSettings {
             name : {
                 title : "Name"
             },
-            basic: {
-                title: 'Basic',
-                width : '100px'
-            },
+            // basic: {
+            //     title: 'Basic',
+            //     width : '100px'
+            // },
             monthYear: {
                 title: 'Month Year',
                 width : '100px'
@@ -37,22 +37,22 @@ export class SlipTableSettings {
                 title: 'Paid Days',
                 width : '100px'
             },
-            lossOfPay: {
-                title: 'Loss Of Pay',
-                width : '100px'
-            },
-            tds:{
-                title: 'TDS',
-                width : '100px'
-            },
-            reimbursements: {
-                title: 'Reimbursements',
-                width : '100px'
-            },
-            netSalary: {
-                title: 'Net Salary',
-                width : '100px'
-            }
+            // lossOfPay: {
+            //     title: 'Loss Of Pay',
+            //     width : '100px'
+            // },
+            // tds:{
+            //     title: 'TDS',
+            //     width : '100px'
+            // },
+            // reimbursements: {
+            //     title: 'Reimbursements',
+            //     width : '100px'
+            // },
+            // netSalary: {
+            //     title: 'Net Salary',
+            //     width : '100px'
+            // }
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { LayoutComponent } from '../layout.component';
 import { Constant } from 'src/app/services/Contant';
@@ -13,6 +13,15 @@ declare var $: any;
 })
 export class AssetComponent implements OnInit {
   inProgress = false;
+  inProgress1 = false;
+  empId="";
+  assetCategory="";
+  deviceName="";
+  serialNo="";
+  dateOfIssue = "";
+  remark = "";
+  empList = [];
+  assetCategoryList = ["Laptop","Mobile Phone","Mouse","Other"];
   assetList = [];
   tableSettings = AssetTableSettings.settings;
   isAdmin : boolean = false;
@@ -28,7 +37,27 @@ export class AssetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!this.isAdmin){
+      this.empId = this.loginEmpId;
+    }
+    this.getAllEmpList();
     this.getAssetAllocation();
+  }
+
+  getAllEmpList(){
+    let jsonData = {
+      loginEmpId: this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId
+    }
+    this.sharedService.getAllListBySelectType(jsonData,"leaveEmp")
+    .subscribe(
+      (result)=>{
+        this.empList = result.empList;
+      },
+      (error)=>{
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("getEmpForLeave"),0);
+      }
+    )
   }
 
   getAssetAllocation(){
@@ -49,6 +78,128 @@ export class AssetComponent implements OnInit {
         this.inProgress = false;
       }
     )
+  }
+
+  changeListener(event: any, i): void {
+    this.readThis(event.target, i);
+  }
+
+  @ViewChild('attFile') attFileVariable: ElementRef;
+  attachmentName: any = "";
+  attachmentStr : any = "";
+  // aadharFileName: any = "";
+  // aadharStr : any = "";
+
+  readThis(inputValue: any, optionNumber): void {
+    var file: File = inputValue.files[0];
+    let wrongFile = false;
+    let fileName = file.name;
+    if(!(fileName.indexOf(".jpg") > -1 || fileName.indexOf(".jpeg") > -1 || 
+    fileName.indexOf(".png") > -1 || fileName.indexOf(".pdf") > -1)){
+      this.layoutComponent.openSnackBar("only .jpg, .jpeg, .png, .pdf format accepted, please choose right file.",2);
+      wrongFile = true;
+    }
+    var myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      let image = myReader.result;
+      if (optionNumber == 1) {
+        this.attachmentName = fileName;
+        this.attachmentStr = image;
+        if(wrongFile){
+          this.attachmentName = "";
+          this.attachmentStr = "";
+          this.attFileVariable.nativeElement.value = "";
+        }
+      }
+      else if (optionNumber == 2) {
+        // this.aadharFileName = fileName;
+        // this.aadharStr = image;
+        if(wrongFile){
+          // this.aadharFileName = "";
+          // this.aadharStr = "";
+        }
+      }
+    }
+    myReader.readAsDataURL(file);
+  }
+
+
+  alertMsg="";
+  validateAsset():any{
+    if(this.empId == ""){
+      this.alertMsg = "Please select an employee";
+      return false;
+    }
+    else if(this.assetCategory == ""){
+      this.alertMsg = "Please select an asset category";
+      return false;
+    }
+    else if(this.deviceName == ""){
+      this.alertMsg = "Please enter device name";
+      return false;
+    }
+    else if(this.serialNo == ""){
+      this.alertMsg = "Please enter serial no";
+      return false;
+    }
+    else if(this.dateOfIssue == ""){
+      this.alertMsg = "Please select date of issue";
+      return false;
+    }
+    else if(this.attachmentName == ""){
+      this.alertMsg = "Please select an device configuration attachment";
+      return false;
+    }
+    return true;
+  }
+  submitAsset(){
+    if(!this.validateAsset()){
+      this.layoutComponent.openSnackBar(this.alertMsg,2);
+      return ;
+    }
+    let jsonData = {
+      loginEmpId: this.loginEmpId,
+      loginEmpRoleId: this.loginEmpRoleId,
+      empId: this.empId,
+      assetCategory: this.assetCategory,
+      deviceName: this.deviceName,
+      serialNo: this.serialNo,
+      dateOfIssue: this.dateOfIssue,
+      attachmentStr: this.attachmentStr,
+      remark: this.remark
+    }
+    this.inProgress1 = true;
+    this.sharedService.insertDataByInsertType(jsonData,"asset")
+    .subscribe(
+      (result)=>{
+        if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
+          this.layoutComponent.openSnackBar(result.responseDesc,1);
+          this.makeAsDefault();
+          this.getAssetAllocation();
+        }
+        else{
+          this.layoutComponent.openSnackBar(result.responseDesc,2);
+        }
+        this.inProgress1 = false;
+        
+      },
+      (error)=>{
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("submitAsset"),0);
+      }
+    )
+  }
+
+  makeAsDefault(){
+    // this.empId="";
+    this.assetCategory="";
+    this.deviceName="";
+    this.serialNo="";
+    this.dateOfIssue="";
+    this.attachmentName="";
+    this.attachmentStr="";
+    this.attFileVariable.nativeElement.value = "";
+    this.remark="";
   }
 
   onCustomAction(event){

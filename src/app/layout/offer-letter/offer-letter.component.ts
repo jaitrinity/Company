@@ -16,6 +16,7 @@ export class OfferLetterComponent implements OnInit {
   isInterviewee : boolean = true;
   selectedIntervieweeList = [];
   intervieweeId = "";
+  id="";
   name = "";
   mobile = "";
   emailId = "";
@@ -25,6 +26,20 @@ export class OfferLetterComponent implements OnInit {
   designation = "";
   doj = "";
   lpa = "";
+  earningsY = "";
+  earningsM = "";
+  basicY = "";
+  basicM = "";
+  hraY = "";
+  hraM = "";
+  conveyanceY = "";
+  conveyanceM = "";
+  laptopY = "";
+  laptopM = "";
+  tdsY = "";
+  tdsM = "";
+  netSalaryY = "";
+  netSalaryM = "";
   todayDate : Date;
   loginEmpId = "";
   loginEmpRoleId = "";
@@ -122,6 +137,22 @@ export class OfferLetterComponent implements OnInit {
       this.alertMsg = "Please enter CTC";
       return false;
     }
+    else if(this.earningsY == "" && this.earningsM == ""){
+      this.alertMsg = "Please enter both Earning value";
+      return false;
+    }
+    else if(this.basicY == "" && this.basicM == ""){
+      this.alertMsg = "Please enter both Basic value";
+      return false;
+    }
+    else if(this.tdsY == "" && this.tdsM == ""){
+      this.alertMsg = "Please enter both TDS value";
+      return false;
+    }
+    else if(this.netSalaryY == "" && this.netSalaryM == ""){
+      this.alertMsg = "Please enter both Net Salary value";
+      return false;
+    }
     return true;
   }
 
@@ -141,10 +172,24 @@ export class OfferLetterComponent implements OnInit {
       addLine2 : this.addLine2,
       designation : this.designation,
       doj : this.doj,
-      lpa : this.lpa
+      lpa : this.lpa,
+      earningsY : this.earningsY,
+      basicY : this.basicY,
+      hraY : this.hraY == "" ? "0" : this.hraY,
+      conveyanceY : this.conveyanceY == "" ? "0" : this.conveyanceY,
+      laptopY : this.laptopY == "" ? "0" : this.laptopY,
+      tdsY : this.tdsY,
+      netSalaryY : this.netSalaryY,
+      earningsM : this.earningsM,
+      basicM : this.basicM,
+      hraM : this.hraM == "" ? "0" : this.hraM,
+      conveyanceM : this.conveyanceM == "" ? "0" : this.conveyanceM,
+      laptopM : this.laptopM == "" ? "0" : this.laptopM,
+      tdsM : this.tdsM,
+      netSalaryM : this.netSalaryM
     }
     this.inProgress1 = true;
-    this.sharedService.insertDataByInsertType(jsonData,"offerLetter")
+    this.sharedService.insertDataByInsertType(jsonData,"offerLetterNew")
     .subscribe(
       (result)=>{
         if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
@@ -160,8 +205,56 @@ export class OfferLetterComponent implements OnInit {
         }
         else{
           this.layoutComponent.openSnackBar(result.responseDesc,2);
+          this.inProgress1 = false;
         }
-        // this.inProgress1 = false;
+      },
+      (error)=>{
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("generateOfferLetter"),0);
+      }
+
+    )
+  }
+
+  editOfferLetter(){
+    let jsonData = {
+      id : this.id,
+      name : this.name,
+      mobile : this.mobile,
+      emailId : this.emailId,
+      officeLocation: this.officeLocation,
+      addLine1 : this.addLine1,
+      addLine2 : this.addLine2,
+      designation : this.designation,
+      doj : this.doj,
+      lpa: this.lpa,
+      earningsY : this.earningsY,
+      basicY : this.basicY,
+      hraY : this.hraY,
+      conveyanceY : this.conveyanceY,
+      laptopY : this.laptopY,
+      tdsY : this.tdsY,
+      netSalaryY : this.netSalaryY,
+      earningsM : this.earningsM,
+      basicM : this.basicM,
+      hraM : this.hraM,
+      conveyanceM : this.conveyanceM,
+      laptopM : this.laptopM,
+      tdsM : this.tdsM,
+      netSalaryM : this.netSalaryM
+    }
+    this.inProgress1 = true;
+    this.sharedService.updateDataByUpdateType(jsonData,"offerLetter")
+    .subscribe(
+      (result)=>{
+        if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
+          this.layoutComponent.openSnackBar(result.responseDesc,1);
+          this.getAllOfferLetter();
+          this.closeAnyModal("editOfferLetterModal");
+        }
+        else{
+          this.layoutComponent.openSnackBar(result.responseDesc,2);
+        }
+        this.inProgress1 = false;
       },
       (error)=>{
         this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("generateOfferLetter"),0);
@@ -202,6 +295,7 @@ export class OfferLetterComponent implements OnInit {
 
   makeAsDefault(){
     this.isInterviewee = true;
+    this.id="";
     this.name = "";
     this.mobile = "";
     this.emailId = "";
@@ -211,19 +305,63 @@ export class OfferLetterComponent implements OnInit {
     this.designation = "";
     this.doj = "";
     this.lpa = "";
+    this.earningsY = "";
+    this.earningsM = "";
+    this.basicY = "";
+    this.basicM = "";
+    this.hraY = "";
+    this.hraM = "";
+    this.conveyanceY = "";
+    this.conveyanceM = "";
+    this.laptopY = "";
+    this.laptopM = "";
+    this.tdsY = "";
+    this.tdsM = "";
+    this.netSalaryY = "";
+    this.netSalaryM = "";
   }
 
   onCustomAction(event){
     switch ( event.action) {
-        case 'viewOffer':
+      case 'editOffer':
+          this.editOffer(event);
+          break;
+      case 'viewOffer':
           this.viewOffer(event);
           break;
-       case 'resendOffer':
+      case 'resendOffer':
           this.resendOffer(event);
           break;
     }
   }
 
+  editOffer(e){
+    this.id = e.data.id;
+    this.name = e.data.name;
+    this.mobile = e.data.mobile;
+    this.emailId = e.data.emailId;
+    this.officeLocation = e.data.officeLocation;
+    this.addLine1 = e.data.addLine1;
+    this.addLine2 = e.data.addLine2;
+    this.designation = e.data.designation;
+    this.doj = e.data.doj;
+    this.lpa = e.data.lpaOrg;
+    this.earningsY = e.data.earningsY;
+    this.basicY = e.data.basicY;
+    this.hraY = e.data.hraY;
+    this.conveyanceY = e.data.conveyanceY;
+    this.laptopY = e.data.laptopY;
+    this.tdsY = e.data.tdsY;
+    this.netSalaryY = e.data.netSalaryY;
+    this.earningsM = e.data.earningsM;
+    this.basicM = e.data.basicM;
+    this.hraM = e.data.hraM;
+    this.conveyanceM = e.data.conveyanceM;
+    this.laptopM = e.data.laptopM;
+    this.tdsM = e.data.tdsM;
+    this.netSalaryM = e.data.netSalaryM;
+    this.openAnyModal("editOfferLetterModal");
+  }
   viewOffer(e){
     this.mobile = e.data.mobile;
     let url = environment.appUrl+"viewOfferLetter.php?mobile="+this.mobile;
@@ -235,7 +373,7 @@ export class OfferLetterComponent implements OnInit {
     let jsonData = {
       mobile : this.mobile
     }
-    this.sharedService.resendOfferLetterToMail(jsonData)
+    this.sharedService.sendOfferLetterToMail(jsonData)
     .subscribe(
       (result)=>{
         if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
@@ -262,5 +400,6 @@ export class OfferLetterComponent implements OnInit {
 
   closeAnyModal(modalName){
     $("#"+modalName).modal("hide");
+    this.makeAsDefault();
   }
 }

@@ -1,9 +1,9 @@
 <div class="row" style="padding: 10px 0px">
-  <!-- <div class="col-md-12">
+  <div class="col-md-12">
     <mat-chip-list #chipList aria-label="Fruit selection">
       <mat-chip color="white" selected (click)="changeSelected($event)">Import Deduction<mat-icon>add_circle_outline</mat-icon></mat-chip>
     </mat-chip-list>
-  </div> -->
+  </div>
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -12,13 +12,14 @@
 </div>
 
 <div id="editEmployeeModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header" style="padding: 10px !important;">
             <h4 class="modal-title tr-color">Edit - {{viewEmpId}}</h4>
             <button type="button" class="btn  btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="closeAnyModal('editEmployeeModal')">Close</button>
         </div>
-        <div class="modal-body det-modal-body">
+        <!-- det-modal-body -->
+        <div class="modal-body">
           <fieldset class="the-fieldset">
             <legend class="the-legend">Personalia</legend>
             <div class="row">
@@ -51,15 +52,19 @@
               <div class="col-md-3">
                 <mat-form-field>
                   <mat-label class="tr-color">DOB *</mat-label>
-                  <input matInput [(ngModel)]="dob">
-                  <mat-hint>YYYY-MM-DD</mat-hint>
+                  <input matInput [(ngModel)]="dob" [matDatepicker]="dobPicker" placeholder="Date of Birth" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker #dobPicker></mat-datepicker>
                 </mat-form-field>
               </div>
               <div class="col-md-3">
                 <mat-form-field>
                   <mat-label class="tr-color">DOJ *</mat-label>
-                  <input matInput [(ngModel)]="doj">
-                  <mat-hint>YYYY-MM-DD</mat-hint>
+                  <input matInput [(ngModel)]="doj" [matDatepicker]="dojPicker" placeholder="Date of Joining" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="dojPicker"></mat-datepicker-toggle>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker #dojPicker></mat-datepicker>
                 </mat-form-field>
               </div>
               <mat-form-field class="col-md-3">
@@ -264,56 +269,63 @@
                     <mat-form-field>
                         <!-- <mat-label class="tr-color">Other Deductions *</mat-label> -->
                         <mat-label class="tr-color">TDS *</mat-label>
-                        <input matInput [(ngModel)]="otherDeductions" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
-                        <input matInput [value]="deductionObj.otherDeductions" *ngIf="(deductionObj | json) != '{}'" readonly>
+                        <input matInput [(ngModel)]="otherDeductions" OnlyNumber=true>
+                        <!-- <input matInput [(ngModel)]="otherDeductions" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.otherDeductions" *ngIf="(deductionObj | json) != '{}'" readonly> -->
                     </mat-form-field>
                   </div>
 
                   <div class="col-md-3">
                     <mat-form-field>
                         <mat-label class="tr-color">Loss of Pay(Leave)</mat-label>
-                        <input matInput [(ngModel)]="lossOfPay" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
-                        <input matInput [value]="deductionObj.lossOfPay" *ngIf="(deductionObj | json) != '{}'" readonly>
+                        <input matInput [(ngModel)]="lossOfPay" OnlyNumber=true>
+                        <!-- <input matInput [(ngModel)]="lossOfPay" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.lossOfPay" *ngIf="(deductionObj | json) != '{}'" readonly> -->
                     </mat-form-field>
                   </div>
 
                   <div class="col-md-3">
                     <mat-form-field>
                         <mat-label class="tr-color">Reimbursements</mat-label>
-                        <input matInput [(ngModel)]="reimbursements" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
-                        <input matInput [value]="deductionObj.reimbursements" *ngIf="(deductionObj | json) != '{}'" readonly>
+                        <input matInput [(ngModel)]="reimbursements" OnlyNumber=true>
+                        <!-- <input matInput [(ngModel)]="reimbursements" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.reimbursements" *ngIf="(deductionObj | json) != '{}'" readonly> -->
                     </mat-form-field>
                   </div>
 
                   <div class="col-md-3">
                     <mat-form-field>
                         <mat-label class="tr-color">Retention bonus</mat-label>
-                        <input matInput [(ngModel)]="retentionBonus" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
-                        <input matInput [value]="deductionObj.retentionBonus" *ngIf="(deductionObj | json) != '{}'" readonly>
+                        <input matInput [(ngModel)]="retentionBonus" OnlyNumber=true>
+                        <!-- <input matInput [(ngModel)]="retentionBonus" *ngIf="(deductionObj | json) == '{}'" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.retentionBonus" *ngIf="(deductionObj | json) != '{}'" readonly> -->
                     </mat-form-field>
                   </div>
 
                   <div class="col-md-3">
                     <mat-form-field>
                         <mat-label class="tr-color">Profession Tax</mat-label>
-                        <input matInput [(ngModel)]="professionTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
-                        <input matInput [value]="deductionObj.professionTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                        <input matInput [(ngModel)]="professionTax" maxlength="2" OnlyNumber=true>
+                        <!-- <input matInput [(ngModel)]="professionTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.professionTax" *ngIf="(deductionObj | json) != '{}'" readonly> -->
                     </mat-form-field>
                   </div>
 
                   <div class="col-md-3">
                     <mat-form-field>
                         <mat-label class="tr-color">Income Tax</mat-label>
-                        <input matInput [(ngModel)]="incomeTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
-                        <input matInput [value]="deductionObj.incomeTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                        <input matInput [(ngModel)]="incomeTax" maxlength="2" OnlyNumber=true>
+                        <!-- <input matInput [(ngModel)]="incomeTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
+                        <input matInput [value]="deductionObj.incomeTax" *ngIf="(deductionObj | json) != '{}'" readonly> -->
                     </mat-form-field>
                   </div>
 
                   <div class="col-md-3">
                     <mat-form-field>
                         <mat-label class="tr-color">Other Tax</mat-label>
-                        <input matInput [(ngModel)]="otherTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true>
-                        <input matInput [value]="deductionObj.otherTax" *ngIf="(deductionObj | json) != '{}'" readonly>
+                        <input matInput [(ngModel)]="otherTax" maxlength="2" OnlyNumber=true>
+                        <!-- <input matInput [(ngModel)]="otherTax" *ngIf="(deductionObj | json) == '{}'" maxlength="2" OnlyNumber=true> -->
+                        <!-- <input matInput [value]="deductionObj.otherTax" *ngIf="(deductionObj | json) != '{}'" readonly> -->
                     </mat-form-field>
                   </div>
               </div>
@@ -326,12 +338,17 @@
                   </button>
               </div>
               <ng-template #elseBlock>
-                <div class="col-md-12">
+                <div class="col-md-4">
+                  <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="submitDeductionData()">
+                    <mat-icon>save</mat-icon> Save
+                  </button> 
+                </div>
+                <div class="col-md-8 text-right">
                   <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="downloadSalarySlip()">
                     <mat-icon>download</mat-icon> Download Salary Slip
                   </button>
                   &nbsp;
-                  <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="sendSalarySlipToMail()">
+                  <button class="text-white" [ngStyle]="{'background-color':button}" mat-raised-button (click)="resendSalarySlipToMail()">
                     <mat-icon>repeat</mat-icon> Resend Salary Slip
                   </button>
                 </div>
@@ -379,11 +396,17 @@
             <input type="file" (change)="addfile($event)" hidden #uploadFile
              accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
           </div>
-          <div class="col-md-3">
+
+          <div class="col-md-3" *ngIf="!inProgress">
             <button type="button" class="btn btn-sm text-white" [ngStyle]="{'background-color':button}" (click)="uploadDeduction()">Upload</button>
           </div>
-        
-          
+        </div>
+
+        <div class="row" *ngIf="inProgress">
+          <div class="col-md-12">
+              <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+              <div class="text-center text-warning">Please Wait</div>
+          </div>
         </div>
 
         <div class="row">
@@ -394,18 +417,18 @@
             <table class="table table-bordered table-striped myTable">
               <thead>
                 <tr>
-                  <th>EmpId</th> <th>Name</th> <th>Month</th> <th>Paid Days</th> <th>Retention Bonus</th> 
-                  <th>Profession Tax</th> 
-                  <!-- <th>Loss Of Pay(Leave)</th>  -->
-                  <th>Other Deductions</th> <th>Income Tax</th> <th>Other Tax</th>
+                  <th>EmpId</th> <th>Name</th> <th>Month</th> <th>Paid Days</th>
+                  <th>TDS</th> <th>Loss of Pay</th> <th>Reimbursements</th> 
+                  <th>Retention Bonus</th> <th>Profession Tax</th> 
+                  <th>Income Tax</th> <th>Other Tax</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let pdl of previewDedunctionList">
-                  <td>{{pdl.empId}}</td> <td>{{pdl.name}}</td> <td>{{pdl.month}}</td> <td>{{pdl.paidDays}}</td> <td>{{pdl.retentionBonus}}</td> 
-                  <td>{{pdl.professionTax}}</td> 
-                  <!-- <td>{{pdl.lossOfPay}}</td>  -->
-                  <td>{{pdl.otherDeductions}}</td> <td>{{pdl.incomeTax}}</td> <td>{{pdl.otherTax}}</td>
+                  <td>{{pdl.empId}}</td> <td>{{pdl.name}}</td> <td>{{pdl.month}}</td> <td>{{pdl.paidDays}}</td> 
+                  <td>{{pdl.tds}}</td> <td>{{pdl.lossOfPay}}</td> <td>{{pdl.reimbursements}}</td> 
+                  <td>{{pdl.retentionBonus}}</td> <td>{{pdl.professionTax}}</td>  
+                  <td>{{pdl.incomeTax}}</td> <td>{{pdl.otherTax}}</td>
                 </tr>
               </tbody>
             </table>

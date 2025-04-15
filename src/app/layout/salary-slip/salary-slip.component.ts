@@ -67,8 +67,9 @@ export class SalarySlipComponent implements OnInit {
 
   viewSlip(evt){
     let monthYear = evt.data.monthYear;
-    let mobile = evt.data.mobile;
-    let url = environment.appUrl+"files/SalarySlip_"+monthYear+"/"+mobile+".pdf";
+    let salarySlipName = evt.data.salarySlipName;
+    // let url = environment.appUrl+"files/SalarySlip_"+monthYear+"/"+salarySlipName+".pdf";
+    let url = environment.appUrl+"downloadAnyPdf.php?monthYear="+monthYear+"&pdfFileName="+salarySlipName;
     window.open(url);
   }
 

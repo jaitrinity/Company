@@ -18,10 +18,13 @@ export class LeaveComponent implements OnInit {
   };
   inProgress : boolean = false;
   halfDay : boolean = false;
+  holidaysHTML="";
   empId = "";
   fromDate = "";
   toDate = "";
   reason = "";
+  holiday = "";
+  doh = "";
   button = "";
   empList = [];
   leaveList = [];
@@ -44,6 +47,7 @@ export class LeaveComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getHolidays();
     this.getAllLeaves();
     this.getEmpForLeave();
   }
@@ -252,6 +256,53 @@ export class LeaveComponent implements OnInit {
       }
     )
   }
+
+  getHolidays(){
+    this.holidaysHTML = "";
+    this.sharedService.getHolidays()
+    .subscribe(
+      (result)=>{
+        this.holidaysHTML = result;
+      },
+      (error)=>{
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("getHolidays"),0);
+      }
+    )
+  }
+
+  saveHolidayData(){
+    if(this.holiday == ""){
+      this.layoutComponent.openSnackBar("Please enter holiday name",2);
+      return;
+    }
+    else if(this.doh == ""){
+      this.layoutComponent.openSnackBar("Please select holiday date",2);
+      return;
+    }
+    this.inProgress = true;
+    let jsonData = {
+      holiday: this.holiday,
+      doh: this.doh
+    }
+    this.sharedService.insertDataByInsertType(jsonData,"holiday")
+    .subscribe(
+      (result)=>{
+        if(result.responseCode == Constant.SUCCESSFUL_STATUS_CODE){
+          this.layoutComponent.openSnackBar(result.responseDesc,1);
+          this.holiday = "";
+          this.doh = "";
+          this.getHolidays();
+        }
+        else{
+          this.layoutComponent.openSnackBar(result.responseDesc,2);
+        }
+        this.inProgress = false;
+      },
+      (error)=>{
+        this.layoutComponent.openSnackBar(Constant.returnServerErrorMessage("submitLeave"),0);
+      })
+  }
+  
 
   changeSelected(e){
     this.openAnyModal("leaveApplyModal")
